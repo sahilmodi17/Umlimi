@@ -118,7 +118,12 @@ const Navbar = () => {
           </div>
           {/* cart */}
           <div className="md:block hidden ">
-            <div className=" lg:w-56 lg:h-8 flex justify-center items-center gap-14  ">
+            <div
+              className=" lg:w-56 lg:h-8 flex justify-center items-center gap-14 hover:cursor-pointer "
+              onClick={() => {
+                navigateTo("/cart");
+              }}
+            >
               <div className="justify-center items-center gap-1 flex ">
                 <div className="w-8 h-8 relative">
                   <BsCart2 className="h-7 w-7" />
@@ -127,7 +132,7 @@ const Navbar = () => {
                     1
                   </div>
                 </div>
-                <div className="justify-start items-center gap-1 flex">
+                <div className="justify-start items-center gap-1 flex ">
                   <div className="flex-col justify-start items-start gap-0.5 inline-flex">
                     <div className="text-slate-700 text-sm font-medium">
                       My cart
@@ -143,15 +148,18 @@ const Navbar = () => {
 
           {/* profile */}
           <div className="md:block hidden ">
-            <div className="xl:mr-16 lg:w-40 h-10 flex justify-center items-center gap-1 ">
+            <div className="xl:mr-16 lg:w-40 h-10 flex justify-center items-center gap-1 hover:cursor-pointer">
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full "
                 src="../../../public/images/umlimi-profile.png"
+                onClick={() => {
+                  navigateTo("/profile");
+                }}
               />
 
               {/* <div className="w-4 h-4 relative" /> */}
-              <div className="lg:block hidden">
-                <select name="" id="">
+              <div className="lg:block hidden ">
+                <select name="" id="" className="hover:cursor-pointer">
                   <option
                     value="name"
                     className="text-slate-700 text-base font-semibold"

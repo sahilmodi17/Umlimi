@@ -1,13 +1,13 @@
 import React from "react";
 
-const Home = () => {
+const Cart = () => {
   return (
     <>
       <div className="flex justify-center h-72 items-center text-4xl">
-        Home Page Coming Soon...
+        Cart Page Coming Soon...
       </div>
     </>
   );
 };
 
-export default Home;
+export default Cart;
