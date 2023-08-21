@@ -1,89 +1,89 @@
-import React from 'react'
+import React from "react";
 
 const Signup = () => {
   return (
     <>
-      <div className='w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center'>
+      <div className="w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center">
         {/* Title */}
-        <div className='mb-4 text-center'>
-          <span className='text-black text-3xl md:text-4xl lg:text-5xl font-semibold'>
-            Welcome to{' '}
+        <div className="mb-4 text-center">
+          <span className="text-black text-3xl md:text-4xl lg:text-5xl font-semibold">
+            Welcome to{" "}
           </span>
-          <span className='text-emerald-400 text-3xl md:text-4xl lg:text-5xl font-semibold'>
-            Umlimi
+          <span className="text-emerald-400 text-3xl md:text-4xl lg:text-5xl font-semibold">
+            Umlimi!
           </span>
         </div>
 
-        <div className='pt-3 w-full md:w-[60%] lg:w-[40%] '>
+        <div className="pt-3 w-full md:w-[60%] lg:w-[40%] ">
           {/* Name Fields */}
-          <div className='flex  md:flex-row gap-5 md:gap-8'>
-            <div className='w-[100%]'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+          <div className="flex  md:flex-row gap-5 md:gap-8">
+            <div className="w-[100%]">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
                 First Name
               </div>
               <input
-                type='text'
-                name='first_name'
-                className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-                placeholder='Mehrab'
+                type="text"
+                name="first_name"
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                placeholder="Mehrab"
               />
             </div>
-            <div className='w-[100%]'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+            <div className="w-[100%]">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
                 Last Name
               </div>
               <input
-                type='text'
-                name='last_name'
-                className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-                placeholder='Bozorgi'
+                type="text"
+                name="last_name"
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                placeholder="Bozorgi"
               />
             </div>
           </div>
 
           {/* Email */}
-          <div className='pt-5'>
-            <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+          <div className="pt-3">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
               Email
             </div>
             <input
-              type='email'
-              name='email'
-              className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-              placeholder='Mehrabbozorgi.business@gmail.com'
+              type="email"
+              name="email"
+              className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+              placeholder="Mehrabbozorgi.business@gmail.com"
             />
           </div>
 
           {/* Password */}
-          <div className='pt-5'>
-            <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+          <div className="pt-3">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
               Set Password
             </div>
             <input
-              type='password'
-              name='password'
-              className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-              placeholder='Enter your password'
+              type="password"
+              name="password"
+              className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+              placeholder="Enter your password"
             />
           </div>
 
           {/* Confirm Password */}
-          <div className='pt-5'>
-            <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+          <div className="pt-3">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
               Confirm Password
             </div>
             <input
-              type='password'
-              name='confirm_password'
-              className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-              placeholder='Confirm your password'
+              type="password"
+              name="confirm_password"
+              className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+              placeholder="Confirm your password"
             />
           </div>
 
           {/* Gender and DOB */}
-          <div className='flex flex-col md:flex-row md:gap-8 pt-5'>
-            <div className='w-full'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+          <div className="flex flex-col md:flex-row md:gap-8 pt-3">
+            <div className="w-full">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
                 Gender
               </div>
               {/* <input
@@ -93,68 +93,68 @@ const Signup = () => {
                 placeholder='male/female'
               /> */}
 
-              <div className=''>
+              <div className="">
                 <select
-                  name=''
-                  id=''
-                  className='hover:cursor-pointer rounded border border-zinc-500 h-12 px-3 w-full'
+                  name=""
+                  id=""
+                  className="hover:cursor-pointer rounded border border-zinc-500 h-12 px-3 w-full"
                 >
                   <option
-                    value='male'
-                    className='text-slate-700 text-base font-semibold'
+                    value="male"
+                    className="text-slate-700 text-base font-semibold"
                   >
                     Male
                   </option>
                   <option
-                    value='female'
-                    className='text-slate-700 text-base font-semibold'
+                    value="female"
+                    className="text-slate-700 text-base font-semibold"
                   >
                     Female
                   </option>
                 </select>
               </div>
             </div>
-            <div className='w-full'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
+            <div className="w-full">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
                 D.O.B
               </div>
               <input
-                type='date'
-                name='dob'
-                className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-                placeholder='Enter your birth date'
+                type="date"
+                name="dob"
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                placeholder="Enter your birth date"
               />
             </div>
           </div>
 
           {/* Buttons */}
-          <div className='mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4'>
+          <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
             <button
-              type='button'
-              className='bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer'
+              type="button"
+              className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
               onClick={() => handleCancel()}
             >
-              <div className='text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2'>
+              <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
                 Cancel
               </div>
             </button>
             <button
-              type='button'
-              className='bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer'
-              onClick={() => handleSignup()}
+              type="button"
+              className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
+              onClick={() => handleLogin()}
             >
-              <div className='text-white text-lg md:text-xl lg:text-2xl font-semibold p-2'>
-                Log in
+              <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
+                Register
               </div>
             </button>
           </div>
 
           {/* Login Prompt */}
-          <div className='mt-4 text-center'>
-            <span className='text-black text-lg md:text-xl lg:text-2xl font-semibold'>
-              Already have an account?{' '}
+          <div className="mt-4 text-center">
+            <span className="text-black text-lg md:text-xl lg:text-2xl font-semibold">
+              Already have an account?{" "}
             </span>
-            <span className='text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold'>
+            <span className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold">
               Log in
             </span>
           </div>
@@ -489,7 +489,7 @@ const Signup = () => {
         </div> */}
       {/* </div> */}
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
