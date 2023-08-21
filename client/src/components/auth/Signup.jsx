@@ -86,12 +86,33 @@ const Signup = () => {
               <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
                 Gender
               </div>
-              <input
+              {/* <input
                 type='text'
                 name='gender'
                 className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
                 placeholder='male/female'
-              />
+              /> */}
+
+              <div className=''>
+                <select
+                  name=''
+                  id=''
+                  className='hover:cursor-pointer rounded border border-zinc-500 h-12 px-3 w-full'
+                >
+                  <option
+                    value='male'
+                    className='text-slate-700 text-base font-semibold'
+                  >
+                    Male
+                  </option>
+                  <option
+                    value='female'
+                    className='text-slate-700 text-base font-semibold'
+                  >
+                    Female
+                  </option>
+                </select>
+              </div>
             </div>
             <div className='w-full'>
               <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold'>
@@ -120,7 +141,7 @@ const Signup = () => {
             <button
               type='button'
               className='bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer'
-              onClick={() => handleLogin()}
+              onClick={() => handleSignup()}
             >
               <div className='text-white text-lg md:text-xl lg:text-2xl font-semibold p-2'>
                 Log in
@@ -141,7 +162,7 @@ const Signup = () => {
       </div>
 
       {/* Footer */}
-      <div className='pt-10 flex justify-center'>
+      {/* <div className='pt-10 flex justify-center'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='1600'
@@ -465,8 +486,8 @@ const Signup = () => {
               </svg>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </>
   )
 }
