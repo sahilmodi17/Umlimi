@@ -1,6 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import validator from "validator";
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setPasswordError] = useState();
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const handleReset = () => {
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
+    setConfirmPassword("");
+  };
+
+  const handleRegister = () => {
+    if (firstName === "") alert("Enter First Name");
+    else if (lastName === "") alert("Enter Last Name");
+    else if (email === "") alert("Enter Email");
+    else if (password === "") alert("Enter Password");
+    else if (confirmPassword === "") alert("Enter Confirm Password");
+  };
+
+  const navigateTo = useNavigate();
+
+  const validateEmail = (e) => {
+    setEmail(e.target.value);
+    if (validator.isEmail(e.target.value)) {
+      setEmailError("");
+    } else {
+      setEmailError("Invalid Email*");
+    }
+  };
+
+  const validatePassword = (e) => {
+    setPassword(e.target.value);
+    if (validator.isStrongPassword(e.target.value)) {
+      setPasswordError("");
+    } else {
+      setPasswordError(
+        "Passwords must have at least 8 characters and must contain : uppercase letters, lowercase letters, numbers, and symbols*"
+      );
+    }
+  };
+
+  const handleConfirmPassword = (e) => {
+    const { value } = e.target;
+    setConfirmPassword(value);
+
+    if (value === password) {
+      setConfirmPasswordError("");
+    } else {
+      setConfirmPasswordError("Passwords do not match");
+    }
+  };
+
   return (
     <>
       <div className="w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center">
@@ -18,7 +79,7 @@ const Signup = () => {
           {/* Name Fields */}
           <div className="flex  md:flex-row gap-5 md:gap-8">
             <div className="w-[100%]">
-              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                 First Name
               </div>
               <input
@@ -26,10 +87,11 @@ const Signup = () => {
                 name="first_name"
                 className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
                 placeholder="Mehrab"
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div className="w-[100%]">
-              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                 Last Name
               </div>
               <input
@@ -37,82 +99,113 @@ const Signup = () => {
                 name="last_name"
                 className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
                 placeholder="Bozorgi"
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
 
           {/* Email */}
           <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
               Email
             </div>
             <input
               type="email"
               name="email"
+              value={email}
               className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
               placeholder="Mehrabbozorgi.business@gmail.com"
+              onChange={validateEmail}
             />
+            {email && (
+              <span
+                className={
+                  emailError === "Valid Email"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {emailError}
+              </span>
+            )}
           </div>
 
           {/* Password */}
           <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
               Set Password
             </div>
             <input
               type="password"
               name="password"
+              value={password}
               className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
               placeholder="Enter your password"
+              onChange={validatePassword}
             />
+            {password && (
+              <span
+                className={
+                  passwordError === "Strong Password"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {passwordError}
+              </span>
+            )}
           </div>
 
           {/* Confirm Password */}
           <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
+            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
               Confirm Password
             </div>
             <input
               type="password"
               name="confirm_password"
+              value={confirmPassword}
               className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
               placeholder="Confirm your password"
+              onChange={handleConfirmPassword}
             />
+            {confirmPassword && (
+              <span
+                className={
+                  confirmPasswordError === "Passwords match"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {confirmPasswordError}
+              </span>
+            )}
           </div>
 
           {/* Gender and DOB */}
-          <div className="flex flex-col md:flex-row md:gap-8 pt-3">
+          {/* <div className="flex flex-col md:flex-row md:gap-8 pt-3">
             <div className="w-full">
               <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
                 Gender
               </div>
-              {/* <input
-                type='text'
-                name='gender'
-                className='bg-white w-full rounded border border-zinc-500 h-12 px-3'
-                placeholder='male/female'
-              /> */}
-
-              <div className="">
-                <select
-                  name=""
-                  id=""
-                  className="hover:cursor-pointer rounded border border-zinc-500 h-12 px-3 w-full"
+              <select
+                name=""
+                id=""
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+              >
+                <option
+                  value="male"
+                  className="text-slate-700 text-base font-semibold"
                 >
-                  <option
-                    value="male"
-                    className="text-slate-700 text-base font-semibold"
-                  >
-                    Male
-                  </option>
-                  <option
-                    value="female"
-                    className="text-slate-700 text-base font-semibold"
-                  >
-                    Female
-                  </option>
-                </select>
-              </div>
+                  Male
+                </option>
+                <option
+                  value="female"
+                  className="text-slate-700 text-base font-semibold"
+                >
+                  Female
+                </option>
+              </select>
             </div>
             <div className="w-full">
               <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
@@ -125,23 +218,23 @@ const Signup = () => {
                 placeholder="Enter your birth date"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Buttons */}
           <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
             <button
               type="button"
               className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={() => handleCancel()}
+              onClick={handleReset}
             >
               <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
-                Cancel
+                Reset
               </div>
             </button>
             <button
               type="button"
               className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={() => handleLogin()}
+              onClick={handleRegister}
             >
               <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
                 Register
@@ -154,7 +247,10 @@ const Signup = () => {
             <span className="text-black text-lg md:text-xl lg:text-2xl font-semibold">
               Already have an account?{" "}
             </span>
-            <span className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold">
+            <span
+              className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold hover:cursor-pointer"
+              onClick={() => navigateTo("/login")}
+            >
               Log in
             </span>
           </div>

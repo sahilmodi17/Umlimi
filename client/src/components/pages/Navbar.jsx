@@ -17,6 +17,11 @@ const Navbar = () => {
     navigateTo("/");
   };
 
+  const handleProfile = (e) => {
+    if (e.target.value === "profile") navigateTo("/profile");
+    else if (e.target.value === "logout") navigateTo("/login");
+  };
+
   return (
     <>
       <nav className="w-full bg-white shadow">
@@ -159,9 +164,15 @@ const Navbar = () => {
 
               {/* <div className="w-4 h-4 relative" /> */}
               <div className="lg:block hidden ">
-                <select name="" id="" className="hover:cursor-pointer">
+                <select
+                  name=""
+                  id=""
+                  className="hover:cursor-pointer"
+                  onChange={handleProfile}
+                  onClick={() => navigateTo("/profile")}
+                >
                   <option
-                    value="name"
+                    value="profile"
                     className="text-slate-700 text-base font-semibold"
                   >
                     Ramzi Cherif

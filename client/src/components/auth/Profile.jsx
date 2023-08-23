@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 const Profile = () => {
+  const [edit, setEdit] = useState(false);
+
+  // const firstNameRef = useRef(null);
+
+  const handleEditClick = () => {
+    setEdit(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="py-10  flex flex-col items-center ">
         <div className="pt-3 flex flex-col  md:w-[60%] lg:w-[40%] ">
           <div className="flex justify-between pb-5  ">
             <div className="text-black text-5xl font-semibold flex items-center">
-              Edit Profile
+              {edit ? "Edit Profile!" : "Welcome user!"}
             </div>
 
             <img
@@ -26,6 +35,7 @@ const Profile = () => {
                 name="first_name"
                 className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
                 placeholder="Mehrab"
+                disabled={!edit}
               />
             </div>
             <div className="w-[100%]">
@@ -37,6 +47,7 @@ const Profile = () => {
                 name="last_name"
                 className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
                 placeholder="Bozorgi"
+                disabled={!edit}
               />
             </div>
           </div>
@@ -51,6 +62,7 @@ const Profile = () => {
               name="email"
               className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
               placeholder="Mehrabbozorgi.business@gmail.com"
+              disabled={!edit}
             />
           </div>
 
@@ -64,6 +76,7 @@ const Profile = () => {
               name="address"
               className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
               placeholder="33062 Zboncak isle"
+              disabled={!edit}
             />
           </div>
 
@@ -77,6 +90,7 @@ const Profile = () => {
               name="contact"
               className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
               placeholder="58077.79"
+              disabled={!edit}
             />
           </div>
 
@@ -91,6 +105,7 @@ const Profile = () => {
                 name="gender"
                 className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
                 placeholder="Enter your city"
+                disabled={!edit}
               />
             </div>
 
@@ -103,6 +118,7 @@ const Profile = () => {
                 name="state"
                 className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
                 placeholder="Enter your state"
+                disabled={!edit}
               />
             </div>
           </div>
@@ -117,30 +133,48 @@ const Profile = () => {
               name="password"
               className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
               placeholder="Enter your password"
+              disabled={!edit}
             />
           </div>
 
           {/* Buttons */}
-          <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
-            <button
-              type="button"
-              className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={() => handleCancel()}
-            >
-              <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
-                Cancel
-              </div>
-            </button>
-            <button
-              type="button"
-              className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={() => handleSave()}
-            >
-              <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
-                Save
-              </div>
-            </button>
-          </div>
+          {!edit ? (
+            <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
+              <button
+                type="button"
+                className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
+                onClick={handleEditClick}
+              >
+                <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
+                  Edit
+                </div>
+              </button>
+            </div>
+          ) : (
+            <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
+              <button
+                type="button"
+                className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
+                onClick={() => {
+                  setEdit(false);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
+                  Cancel
+                </div>
+              </button>
+              <button
+                type="button"
+                className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
+                onClick={() => handleSave()}
+              >
+                <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
+                  Save
+                </div>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
