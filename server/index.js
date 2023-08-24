@@ -3,14 +3,24 @@ const app = express();
 require("dotenv").config();
 const connectDB = require("./db/connect");
 
-const PORT = 3000;
+const PORT = 8000;
 const auth = require("./routes/auth");
-const temp = require("./routes/temp");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const authentication = require("./middleware/authentication");
+const dashboardRouter = require("./routes/dashboardRouter");
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use("/api/v1/auth", auth);
-app.use("/api/v1/", temp);
+app.use("/api/v1/dashboard", authentication, dashboardRouter);
 
 const start = async () => {
   console.log("this time");

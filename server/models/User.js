@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken")
-require("dotenv").config()
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const UserSchema = new mongoose.Schema({
   firstName: {
@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     minlength: 3,
   },
-   
+
   lastName: {
     type: String,
     required: [true, "please provide last name"],
@@ -34,29 +34,41 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
   },
 
-  phoneNumber: {
+  address: {
     type: String,
-    required: [true, "Please provide phone number"],
-    length: 10,
+    required: [true, "Please provide address"],
+    trim: true,
+    minlength: 3,
   },
 
-  
+  city: {
+    type: String,
+    required: [true, "Please provide city"],
+    trim: true,
+    minlength: 3,
+  },
+
+  state: {
+    type: String,
+    required: [true, "Please provide first name"],
+    trim: true,
+    minlength: 3,
+  },
 });
 
+UserSchema.pre("save", async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
-UserSchema.pre('save', async function(){
- const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-})
-
-UserSchema.methods.createToken = function(){
-    return jwt.sign(
-      { userId: this._id, email: this.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
-  }
+UserSchema.methods.createToken = function () {
+  return jwt.sign(
+    { userId: this._id, email: this.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    }
+  );
+};
 
 module.exports = mongoose.model("User", UserSchema);

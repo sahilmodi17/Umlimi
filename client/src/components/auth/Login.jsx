@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,9 +16,21 @@ const Login = () => {
     setPassword("");
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email === "") alert("Enter Email");
     else if (password === "") alert("Enter Password");
+    else {
+      try {
+        const data = { email, password };
+
+        const res = await axios.post("/api/v1/auth/user/login", data);
+        console.log(res);
+        navigateTo("/");
+      } catch (err) {
+        console.log(err);
+        alert("please enter valid credentials");
+      }
+    }
   };
 
   const validateEmail = (e) => {
@@ -97,13 +110,13 @@ const Login = () => {
             )}
           </div>
 
-          <div className="text-lg my-2">
+          {/* <div className="text-lg my-2">
             <span className="">Forgot Password? </span>
             <span className="text-[#3BB77E] cursor-pointer" onClick={() => {}}>
               Reset now.
             </span>
-          </div>
-          <div className="my-2">
+          </div> */}
+          <div className="my-4">
             <button
               type="button"
               className="w-40 h-10 bg-white rounded border border-emerald-400"

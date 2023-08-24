@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import axios from "axios";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,12 +22,23 @@ const Signup = () => {
     setConfirmPassword("");
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (firstName === "") alert("Enter First Name");
     else if (lastName === "") alert("Enter Last Name");
     else if (email === "") alert("Enter Email");
     else if (password === "") alert("Enter Password");
     else if (confirmPassword === "") alert("Enter Confirm Password");
+    else {
+      try {
+        const data = { firstName, lastName, email, password };
+
+        const res = await axios.post("/api/v1/auth/user/register", data);
+        console.log(res);
+        navigateTo("/");
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const navigateTo = useNavigate();
@@ -61,6 +73,8 @@ const Signup = () => {
       setConfirmPasswordError("Passwords do not match");
     }
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>

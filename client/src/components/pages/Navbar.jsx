@@ -6,6 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const navigateTo = useNavigate();
 
@@ -154,37 +155,52 @@ const Navbar = () => {
           {/* profile */}
           <div className="md:block hidden ">
             <div className="xl:mr-16 lg:w-40 h-10 flex justify-center items-center gap-1 hover:cursor-pointer">
-              <img
-                className="w-10 h-10 rounded-full "
-                src="../../../public/images/umlimi-profile.png"
+              <button
                 onClick={() => {
                   navigateTo("/profile");
                 }}
-              />
+                className="py-2 px-4 text-center hover:bg-whatsapp hover:text-white rounded-lg"
+              >
+                <img
+                  className="w-10 h-10 rounded-full "
+                  src="../../../public/images/umlimi-profile.png"
+                />
+              </button>
 
-              {/* <div className="w-4 h-4 relative" /> */}
-              <div className="lg:block hidden ">
-                <select
-                  name=""
-                  id=""
-                  className="hover:cursor-pointer"
-                  onChange={handleProfile}
-                  onClick={() => navigateTo("/profile")}
+              {/* <div className="relative">
+                <button
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="py-2 px-4 text-center hover:bg-whatsapp hover:text-white rounded-lg"
                 >
-                  <option
-                    value="profile"
-                    className="text-slate-700 text-base font-semibold"
+                 
+                  <img
+                    className="w-10 h-10 rounded-full "
+                    src="../../../public/images/umlimi-profile.png"
+                  />
+                </button>
+                {isProfileOpen && (
+                  <div
+                    className="absolute top-10 -left-0 w-36 bg-white shadow-lg border"
+                    onMouseLeave={() => setIsProfileOpen(false)}
                   >
-                    Ramzi Cherif
-                  </option>
-                  <option
-                    value="logout"
-                    className="text-slate-700 text-base font-semibold"
-                  >
-                    Log Out
-                  </option>
-                </select>
-              </div>
+                    <div
+                      className="py-2 px-4 text-start cursor-pointer"
+                      // onClick={handleProfile}
+                      onClick={() => {
+                        navigateTo("/profile");
+                      }}
+                    >
+                      Profile
+                    </div>
+                    <div
+                      className="py-2 px-4 text-start cursor-pointer hover:bg-whatsapp hover:text-white"
+                      // onClick={handleLogout}
+                    >
+                      Logout
+                    </div>
+                  </div>
+                )}
+              </div> */}
             </div>
           </div>
         </div>
