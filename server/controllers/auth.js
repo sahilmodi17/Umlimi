@@ -28,7 +28,7 @@ const adminRegister = async (req, res) => {
         const token = admin.createToken();
         console.log("1");
         res.cookie("token", token, {
-          httpOnly: true,
+          httpOnly: false,
           expires: new Date(Date.now() + 600000),
         });
         return res.status(200).json({ msg: "data entered", token });
@@ -73,7 +73,7 @@ const adminLogin = async (req, res) => {
         console.log("login token : " + token);
         res.cookie("token", token, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // ms
-          httpOnly: true,
+          httpOnly: false,
         });
 
         return res
@@ -113,7 +113,7 @@ const userLogin = async (req, res) => {
         console.log("login token : " + token);
         res.cookie("token", token, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // ms
-          httpOnly: true,
+          httpOnly: false,
         });
 
         return res.status(201).json({});
@@ -143,7 +143,7 @@ const userRegister = async (req, res) => {
     const token = user.createToken();
 
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       expires: new Date(Date.now() + 600000),
     });
     return res.json({ msg: "from register" });

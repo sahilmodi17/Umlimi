@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
@@ -187,23 +188,24 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Password */}
-          {/* <div className="pt-5">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl font-semibold">
-              Password
-            </div>
-            <input
-              type="password"
-              name="password"
-              className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
-              placeholder="Enter your password"
-              disabled={!edit}
-            />
-          </div> */}
-
           {/* Buttons */}
           {!edit ? (
             <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
+              <button
+                type="button"
+                className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
+                onClick={() => {
+                  Cookies.remove("token", { domain: "localhost", path: "/" });
+
+                  // Cookies.remove("token");
+                  navigateTo("/");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
+                  Logout
+                </div>
+              </button>
               <button
                 type="button"
                 className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"

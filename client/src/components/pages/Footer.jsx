@@ -1,7 +1,9 @@
 import React from "react";
 import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigateTo = useNavigate();
   return (
     <>
       <footer className="bg-white dark:bg-gray-900 font-quicksand  ">
@@ -9,7 +11,7 @@ const Footer = () => {
           <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div className="md:flex md:justify-between">
               <div className="mb-6 md:mb-0">
-                <a href="https://flowbite.com/" className="flex items-center">
+                <a href="/" className="flex items-center">
                   <img
                     src="../../../public/images/umlimi-logo.jpeg"
                     alt="umlimi-logo"
@@ -34,31 +36,26 @@ const Footer = () => {
                 </h2>
                 <ul className=" h-32 mb-6 text-gray-500 dark:text-gray-400 font-medium flex flex-col justify-between">
                   <li className="">
-                    <a href="https://flowbite.com/" className="hover:underline">
+                    <a href="#" className="hover:underline">
                       Wishlist
                     </a>
                   </li>
                   <li className="">
                     <a
-                      href="https://tailwindcss.com/"
-                      className="hover:underline"
+                      href="/cart"
+                      className="  hover:underline"
+                      // onClick={() => navigateTo("/cart")}
                     >
                       Cart
                     </a>
                   </li>
                   <li className="">
-                    <a
-                      href="https://tailwindcss.com/"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       Track Order
                     </a>
                   </li>
                   <li className="">
-                    <a
-                      href="https://tailwindcss.com/"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       Shipping Details
                     </a>
                   </li>
@@ -70,42 +67,27 @@ const Footer = () => {
                 </h2>
                 <ul className=" h-40 mb-6 flex flex-col justify-between text-gray-500 dark:text-gray-400 font-medium">
                   <li className="">
-                    <a
-                      href="https://github.com/themesberg/flowbite"
-                      className="hover:underline "
-                    >
+                    <a href="#" className="hover:underline ">
                       About Us
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://discord.gg/4eeurUVvTy"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       Contact
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://discord.gg/4eeurUVvTy"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       Hot Deals
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://discord.gg/4eeurUVvTy"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       New Product
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://discord.gg/4eeurUVvTy"
-                      className="hover:underline"
-                    >
+                    <a href="#" className="hover:underline">
                       Promotions
                     </a>
                   </li>
@@ -150,7 +132,7 @@ const Footer = () => {
             <div className="sm:flex sm:items-center sm:justify-between">
               <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                 © 2023{" "}
-                <a href="https://flowbite.com/" className="hover:underline">
+                <a href="/" className="hover:underline">
                   Umlimi™
                 </a>
                 . All Rights Reserved.
