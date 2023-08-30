@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
+
 import { BiSearch } from "react-icons/bi";
 import { BsCart2 } from "react-icons/bs";
 
@@ -159,12 +161,9 @@ const Navbar = () => {
                 onClick={() => {
                   navigateTo("/profile");
                 }}
-                className="py-2 px-4 text-center hover:bg-whatsapp hover:text-white rounded-lg"
+                className="py-2 px-4 text-center hover:bg-whatsapp hover:text-gray-500 rounded-lg"
               >
-                <img
-                  className="w-10 h-10 rounded-full "
-                  src="../../../public/images/umlimi-profile.png"
-                />
+                <VscAccount className="w-6 h-6" title="Profile" />
               </button>
 
               {/* <div className="relative">
