@@ -12,7 +12,7 @@ const AdminOrder = () => {
 
   return (
     <>
-      <div className=" flex min-h-[150vh] w-[80%] bg-emerald-100">
+      <div className=" flex min-h-[140vh] w-[80%] bg-emerald-100">
         <div className="container ">
           <AdminNavbar />
 
