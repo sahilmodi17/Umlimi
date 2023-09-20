@@ -1,158 +1,97 @@
-const AllProduct = require("../models/allProducts");
-const SellProduct = require("../models/sellProduct");
+const Product = require("../models/Product");
+const cloudinary = require("cloudinary").v2;
 
-const getAllProducts = async (req, res) => {
+cloudinary.config({
+  cloud_name: "drt8zrvjx",
+  api_key: "651992168492543",
+  api_secret: "12wbhtfrPtU6AHlvoipsmLIdh8E",
+});
+const addProduct = async (req, res) => {
+  const { name, price, qty, description, category } = req.body;
+  const file = req.files.image1;
+
+  // console.log(req.files);
   try {
-    const products = await AllProduct.find({});
-    // console.log(products);
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const image1 = result.url;
+
+    const tempData = {
+      name,
+      price,
+      qty,
+      description,
+      category,
+      outOfStock: false,
+      image1,
+    };
+
+    // Create product with image URL
+    const product = await Product.create(tempData);
+
+    return res.status(200).json({ msg: "Data entered", product });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ err: "Error uploading image or creating product" });
+  }
+};
+
+const updateProduct = async (req, res) => {
+  const productId = req.params.productId;
+  const data = req.body;
+
+  try {
+    const updateProduct = await Product.findOneAndUpdate(
+      { _id: productId },
+      data,
+      {
+        new: true,
+        runValidator: true,
+      }
+    );
+    if (!updateProduct) {
+      throw `no porduct with id ${productId}`;
+    } else {
+      return res.status(200).json({ updateProduct });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      err: error,
+    });
+  }
+};
+
+const getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
     res.send({ products });
   } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-};
-
-const getPaginatedProducts = async (req, res) => {
-  try {
-    // console.log("HI");
-    console.log(req.query);
-    let { pageNumber, limit } = req.query;
-    limit = limit || 8;
-
-    let totalProducts = await AllProduct.countDocuments({
-      adminApproved: true,
-      markedSold: false,
+    return res.status(500).json({
+      err: error,
     });
-    let startIndex = pageNumber * limit;
-    let endIndex = (pageNumber + 1) * limit;
-
-    const paginatedProducts = await AllProduct.find({
-      adminApproved: true,
-      markedSold: false,
-    })
-      .skip(startIndex)
-      .limit(limit)
-      .exec();
-
-    console.log(totalProducts);
-    let totalPages = parseInt(Math.ceil(totalProducts / limit));
-    res.send({ paginatedProducts, totalPages });
-  } catch (err) {
-    res.send(err);
   }
 };
-
-const getProductById = async (req, res) => {};
 
 const getProductCategorywise = async (req, res) => {
   try {
-    const products = await AllProduct.find({ category: req.params.category });
+    const products = await Product.find({ category: req.params.category });
 
     if (!products) {
-      throw new Error("invalid category");
+      throw "invalid category";
     }
     res.send({ products });
   } catch (error) {
-    res.send(error);
-  }
-};
-
-const getProductStatewise = async (req, res) => {
-  try {
-    let params = req.params;
-    params.state = params.state.toUpperCase();
-    const products = await AllProduct.find({ state: params.state });
-    res.send({ products });
-  } catch (error) {
-    res.send(error);
-  }
-};
-
-const getProductCitywise = async (req, res) => {
-  try {
-    let params = req.params;
-    params.city = params.city.toUpperCase();
-    const products = await AllProduct.find({ city: params.city });
-    res.send({ products });
-  } catch (error) {
-    res.send(error);
-  }
-};
-
-const getProductUser = async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    // console.log(req.params);
-
-    const products = await SellProduct.find({ userId: userId })
-      .populate({
-        path: "products",
-        model: "allProduct",
-        select: "",
-      })
-      .exec();
-
-    // console.log("products", products[0].products);
-    res.send({ products: products[0].products });
-  } catch (error) {
-    res.send(error);
-  }
-};
-
-const searchProducts = async (req, res) => {
-  try {
-    const query = req.query.q;
-    const matchingProducts = await AllProduct.find({
-      $or: [
-        { title: { $regex: query, $options: "i" } },
-        { brand: { $regex: query, $options: "i" } },
-        { category: { $regex: query, $options: "i" } },
-        { city: { $regex: query, $options: "i" } },
-        { state: { $regex: query, $options: "i" } },
-      ],
+    return res.status(500).json({
+      err: error,
     });
-    res.json(matchingProducts);
-  } catch (error) {
-    res.send(error);
-  }
-};
-
-const sellProduct = async (req, res) => {
-  try {
-    let product = new AllProduct(req.body.state);
-    await product.save();
-
-    // console.log(product._id);
-
-    // console.log(req.body);
-
-    let oldSeller = await SellProduct.findOne({ userId: req.body.userId });
-
-    if (!oldSeller) {
-      let newProduct = new SellProduct();
-      newProduct.userId = req.body.userId;
-      newProduct.products = product._id;
-
-      await newProduct.save();
-    }
-
-    oldSeller.products.push(product._id);
-    oldSeller.save();
-
-    res.send({ message: "new product added" });
-  } catch (error) {
-    res.send(error);
   }
 };
 
 module.exports = {
-  getAllProducts,
+  addProduct,
+  updateProduct,
+  getProducts,
   getProductCategorywise,
-  getProductStatewise,
-  getProductCitywise,
-  getProductUser,
-  getProductById,
-  searchProducts,
-  getPaginatedProducts,
-  sellProduct,
 };
