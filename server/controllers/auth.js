@@ -26,7 +26,7 @@ const adminRegister = async (req, res) => {
         }
         const admin = await Admin.create(tempData);
         const token = admin.createToken();
-        console.log("1");
+        // console.log("1");
         res.cookie("token", token, {
           httpOnly: false,
           expires: new Date(Date.now() + 600000),
@@ -184,7 +184,7 @@ const editUser = async (req, res) => {
       runValidator: true,
     });
     if (!updateUser) {
-      throw "no user with id ${transactionId}";
+      throw `no user with id ${userId}`;
     } else {
       return res.status(200).json({ updateUser });
     }

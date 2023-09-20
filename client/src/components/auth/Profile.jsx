@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import PopUp_Dialog from "../pages/PopUp_Dialog";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
@@ -14,6 +15,11 @@ const Profile = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [userId, setUserId] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const navigateTo = useNavigate();
 
@@ -117,12 +123,24 @@ const Profile = () => {
             <input
               type="email"
               name="email"
-              className="bg-white w-full rounded border border-zinc-500 h-12 px-3"
+              className="bg-white w-[80%] rounded border border-zinc-500 h-12 px-3"
               placeholder="Mehrabbozorgi.business@gmail.com"
               disabled={!edit}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            <button
+              type="button"
+              className=" px-4 py-2  mt-4"
+              onClick={openModal}
+              style={{ color: "#2929d1" }}
+            >
+              Verify Email
+            </button>
+
+            {isModalOpen && (
+              <PopUp_Dialog onClose={() => setIsModalOpen(false)} />
+            )}
           </div>
 
           {/* address */}

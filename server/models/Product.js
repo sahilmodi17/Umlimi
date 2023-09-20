@@ -1,33 +1,49 @@
 const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
-  p_name: {
+  name: {
     type: String,
     required: [true, "Please provide first product name"],
     trim: true,
     minlength: 1,
   },
 
-  p_price: {
+  price: {
     type: String,
     required: [true, "Please provide first product price"],
   },
 
-  p_description: {
-    type: String, 
+  qty: {
+    type: Number,
+    required: [true, "Please Enter the qty"],
+  },
+
+  description: {
+    type: String,
     minlength: 5,
     required: [true, "Please provide product description"],
   },
 
-  p_outOfStock: {
+  outOfStock: {
     type: Boolean,
     required: [true, "Please mention product is in stock or not"],
   },
 
-  p_image: {
+  image1: {
     type: String,
   },
-  
+  // image2: {
+  //   type: String,
+  // },
+  // image3: {
+  //   type: String,
+  // },
+
+  category: {
+    type: String,
+    minlength: 3,
+    required: [true, "Please provide product category"],
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

@@ -55,11 +55,11 @@ const Login = () => {
 
   return (
     <>
-      <div className="  h-[100vh] w-[100vw] flex justify-center items-center">
+      <div className=" bg-emerald-100 h-[100vh] w-[100vw] flex justify-center items-center">
         <div className=" sm:w-[60%] sm:h-[60%]">
           <div className="font-quicksand text-5xl mb-3">
             <span className="">Welcome </span>
-            <span className="text-[#3BB77E]">Back!</span>
+            <span className="text-emerald-600">Back!</span>
           </div>
           <div className="my-2">
             <div>
