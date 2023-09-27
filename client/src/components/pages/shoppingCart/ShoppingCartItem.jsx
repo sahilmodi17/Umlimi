@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { useCartContext } from "../../../context/Cart_context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +37,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShoppingCartItem() {
+export default function ShoppingCartItem({
+  id,
+  img,
+  title,
+  price,
+  amount,
+  category,
+  size,
+}) {
   const classes = useStyles();
+  const { remove, increase, decrease, toggleAmount } = useCartContext();
 
   return (
     <Card className={classes.root}>
@@ -46,6 +56,7 @@ export default function ShoppingCartItem() {
           className={classes.CloseButton}
           color="inherit"
           aria-label="close"
+          onClick={() => remove(id)}
         >
           <CloseIcon />
         </IconButton>
@@ -60,11 +71,11 @@ export default function ShoppingCartItem() {
           color="textSecondary"
           gutterBottom
         >
-          Category
+          {category}
         </Typography>
 
         <Typography variant="div" component="h2">
-          Item Name{" "}
+          {title}
         </Typography>
         <Typography variant="subtitle2">
           <hr />
@@ -77,7 +88,7 @@ export default function ShoppingCartItem() {
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1}>
             <Typography variant="h6" component="div">
-              M
+              {size}
             </Typography>
           </Grid>
           <Grid item xs={11} sm={11} md={11} lg={11}>
@@ -87,7 +98,7 @@ export default function ShoppingCartItem() {
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1}>
             <Typography variant="h6" component="div">
-              1
+              {amount}
             </Typography>
           </Grid>
           <Grid item xs={10} sm={9} md={10} lg={10}>
@@ -101,7 +112,7 @@ export default function ShoppingCartItem() {
           </Grid>
           <Grid item xs={2} sm={2} md={2} lg={1}>
             <Typography variant="h6" component="div" color="black">
-              $000.00
+              ${price}
             </Typography>
           </Grid>
         </Grid>

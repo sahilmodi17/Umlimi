@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
-    position: "absolute",
+    position: "sticky",
     top: "5rem",
     minWidth: "275",
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OrderSummaryItem() {
+export default function OrderSummaryItem({ total }) {
   const classes = useStyles();
 
   return (
@@ -60,7 +60,7 @@ export default function OrderSummaryItem() {
               component="div"
               className={classes.BlackText}
             >
-              $0
+              ${total}
             </Typography>
           </Grid>
           <Grid item xs={11} sm={11} md={11} lg={11}>
