@@ -1,17 +1,74 @@
-import React, { useContext, useState } from "react";
-
-const UserContext = React.createContext();
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+const UserContext = React.createContext()
 
 export const UserProvider = ({ children }) => {
-  const [data, setData] = useState("");
-  const [sidebar, setSidebar] = useState("dashboard");
+  const [data, setData] = useState('')
+  const [searchData, setSearchData] = useState([])
+  const [sidebar, setSidebar] = useState('dashboard')
+  const [searchName, setSearchName] = useState('')
+  const [isSearch, setIsSearch] = useState(false)
+  const [email, setEmail] = useState('')
+  const [otp, setOTP] = useState('')
+  const [category, setCategory] = useState('All')
+  const [categoryData, setCategoryData] = useState([])
+  const searchproduct = async () => {
+    console.log(searchName)
+
+    if (searchName == '') {
+      setIsSearch(false)
+      setSearchData([])
+    } else {
+      setIsSearch(true)
+
+      try {
+        const { data } = await axios.post('/api/v1/admin/searchproduct', {
+          name: searchName,
+        })
+
+        setSearchData(data.products)
+        console.log(data)
+        console.log(data.products)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  // useEffect(() => {
+  //   searchproduct()
+  // }, [searchName])
+
   return (
-    <UserContext.Provider value={{ data, setData, sidebar, setSidebar }}>
+    <UserContext.Provider
+      value={{
+        data,
+        otp,
+        setOTP,
+        setData,
+        sidebar,
+        setSidebar,
+        searchData,
+        setSearchData,
+        searchName,
+        setSearchName,
+        isSearch,
+        setIsSearch,
+        searchproduct,
+        email,
+        setEmail,
+        category,
+        setCategory,
+        categoryData,
+        setCategoryData,
+      }}
+    >
       {children}
     </UserContext.Provider>
-  );
-};
+  )
+}
 
 export const useUserContext = () => {
-  return useContext(UserContext);
-};
+  return useContext(UserContext)
+}
