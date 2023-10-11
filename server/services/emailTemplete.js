@@ -1,4 +1,4 @@
-module.exports = ({ Otp }) => {
+module.exports = ({ otp }) => {
   return `
         <!doctype html>
             <html>
@@ -13,5 +13,5 @@ module.exports = ({ Otp }) => {
                 
             </body>
         </html>
-    `;
-};
+    `
+}

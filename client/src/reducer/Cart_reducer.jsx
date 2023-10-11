@@ -56,7 +56,7 @@ const reducer = (state, action) => {
   // Inside your reducer
   if (action.type === "ADD_TO_CART") {
     console.log("add to cart");
-    const newItem = action.payload;
+    const newItem = action.payload; 
     const existingItemIndex = state.cart.findIndex(
       (item) => item.id === newItem.id
     );
@@ -71,7 +71,9 @@ const reducer = (state, action) => {
 
       return { ...state, cart: updatedCart };
     } else {
+      
       return { ...state, cart: [...state.cart, newItem] };
+
     }
   }
 
