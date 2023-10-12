@@ -30,6 +30,7 @@ const Signup = () => {
     setFirstName('')
     setLastName('')
     setConfirmPassword('')
+    setOTP('')
   }
 
   const handleSendOTP = async () => {
@@ -169,6 +170,7 @@ const Signup = () => {
             <input
               type='email'
               name='email'
+              disabled={otp && true}
               className='bg-white w-[80%] rounded border border-zinc-500 h-12 px-3'
               placeholder='Mehrabbozorgi.business@gmail.com'
               value={email}
@@ -201,6 +203,7 @@ const Signup = () => {
               {emailError}
             </span>
           )}
+          {otp && <span className='text-green-500'>Email verified</span>}
           {/* {email && (
             <div className='flex gap-5'>
               <button

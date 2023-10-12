@@ -25,6 +25,7 @@ const Navbar = () => {
   }
 
   const handleHome = () => {
+    setCategory('')
     navigateTo('/')
   }
 
@@ -45,18 +46,28 @@ const Navbar = () => {
 
   const handleCategory = (e) => {
     const selectedCategory = e.target.value
+    console.log(selectedCategory)
     setCategory(selectedCategory) // Update the category state
   }
 
   useEffect(() => {
     // The code inside this useEffect will execute when 'category' changes.
     console.log(category) // Log the updated value of category
-
-    if (category === 'All') {
-      navigateTo('/')
-    } else {
+    // if (category === '') {
+    //   navigateTo('/')
+    // }
+    if (category === 'all') {
+      console.log('hellow')
+      navigateTo('/products')
+    }
+    if (category === 'fruit') {
+      console.log('hi')
       navigateTo('/categoryProduct')
-    } 
+    }
+    if (category === 'vegetable') {
+      console.log('hello')
+      navigateTo('/categoryProduct')
+    }
   }, [category])
 
   // Add category as a dependency to useEffect
@@ -158,22 +169,21 @@ const Navbar = () => {
                     onChange={(e) => {
                       handleCategory(e)
                     }}
-                    value={category}
                   >
                     <option
-                      value='All'
+                      value='all'
                       className='text-slate-700 text-sm font-semibold'
                     >
                       All Categories
                     </option>
                     <option
-                      value='Fruits'
+                      value='fruit'
                       className='text-slate-700 text-sm font-semibold'
                     >
                       Fruits
                     </option>
                     <option
-                      value='Vegetables'
+                      value='vegetable'
                       className='text-slate-700 text-sm font-semibold'
                     >
                       Vegetables

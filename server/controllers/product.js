@@ -76,8 +76,9 @@ const getProducts = async (req, res) => {
 
 const getProductCategorywise = async (req, res) => {
   try {
-    console.log("inside getProductCategorywise")
-    const products = await Product.find({ category: req.body.category })
+    // console.log('inside getProductCategorywise')
+    console.log(req.query.category)
+    const products = await Product.find({ category: req.query.category })
     console.log(products)
     if (!products) {
       throw 'invalid category'

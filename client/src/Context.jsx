@@ -11,8 +11,9 @@ export const UserProvider = ({ children }) => {
   const [isSearch, setIsSearch] = useState(false)
   const [email, setEmail] = useState('')
   const [otp, setOTP] = useState('')
-  const [category, setCategory] = useState('All')
+  const [category, setCategory] = useState('')
   const [categoryData, setCategoryData] = useState([])
+  const [allData, setAllData] = useState([])
   const searchproduct = async () => {
     console.log(searchName)
 
@@ -33,6 +34,17 @@ export const UserProvider = ({ children }) => {
       } catch (error) {
         console.log(error)
       }
+    }
+  }
+
+  const allProduct = async () => {
+    try {
+      const { data } = await axios.get('/api/v1/admin/getAllProducts')
+      setAllData(data.products)
+      // console.log(data)
+      // console.log(data.products)
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -62,6 +74,9 @@ export const UserProvider = ({ children }) => {
         setCategory,
         categoryData,
         setCategoryData,
+        allProduct,
+        allData,
+        setAllData,
       }}
     >
       {children}

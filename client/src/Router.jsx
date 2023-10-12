@@ -17,6 +17,7 @@ import SingleProduct from './components/pages/shoppingCart/SingleProduct'
 import SearchProduct from './components/pages/shoppingCart/SearchProduct'
 import CategoryProduct from './components/pages/shoppingCart/CategoryProduct'
 import Splash from './components/auth/Splash'
+import Product from './components/pages/product/Product'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/categoryProduct',
         element: <CategoryProduct />,
+      },
+      {
+        path: '/products',
+        element: <Product />,
       }
     ],
   },

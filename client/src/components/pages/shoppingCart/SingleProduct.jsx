@@ -2,13 +2,12 @@ import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { featuredProducts } from '../Temp'
 import { useUserContext } from '../../../Context'
-import axios from 'axios'
+
 import { useCartContext } from '../../../context/Cart_context'
 const SingleProduct = () => {
   const { id } = useParams()
   const { addToCart } = useCartContext()
-  const { searchproduct, isSearch, searchName, searchData, setIsSearch } =
-    useUserContext()
+  const { isSearch, searchData } = useUserContext()
 
   let product = featuredProducts.filter((item) => {
     return item.id === id
@@ -38,23 +37,10 @@ const SingleProduct = () => {
                   <div className='relative mb-6 lg:mb-10 lg:h-96'>
                     <img
                       className='object-contain w-full lg:h-full'
-                      src={product[0]?.image}
+                      src={product[0]?.image1}
                       alt=''
                     />
                   </div>
-
-                  {/* <div className="w-1/2 p-2 sm:w-1/4">
-                      <a
-                        className="block border border-gray-200 hover:border-emerald-400 dark:border-gray-700 dark:hover:border-emerald-300"
-                        href="#"
-                      >
-                        <img
-                          className="object-contain w-full lg:h-28"
-                          src="https://i.postimg.cc/0N4Kk1PN/black-microprocessors-removebg-preview.png"
-                          alt=""
-                        />
-                      </a>
-                    </div> */}
                 </div>
               </div>
               <div className='w-full px-4 md:w-1/2'>
