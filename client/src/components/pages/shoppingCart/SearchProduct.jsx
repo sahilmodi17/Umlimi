@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useUserContext } from '../../../Context'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useUserContext } from "../../../Context";
 const SearchProduct = () => {
+
   const { searchproduct, searchData } = useUserContext()
 
+
   useEffect(() => {
-    searchproduct()
-  }, [])
+    searchproduct();
+  }, []);
   return (
     <>
+
       <div className='border border-green-500 flex gap-5'>
         {searchData.map((product, index) => {
           return (
@@ -35,17 +38,20 @@ const SearchProduct = () => {
                       ${product.price}
                     </span>
                     <button className='text-white bg-emerald-400 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-5 px-1.5 py-2.5 text-center'>
+
                       Add to cart
                     </button>
                   </div>
                 </div>
               </div>
             </Link>
+
           )
+
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SearchProduct
+export default SearchProduct;

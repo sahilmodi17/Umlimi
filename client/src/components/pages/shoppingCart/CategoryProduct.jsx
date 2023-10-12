@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useUserContext } from '../../../Context'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useUserContext } from "../../../Context";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const CategoryProduct = () => {
-  const navigateTo = useNavigate()
-  const { category, setCategoryData, categoryData } = useUserContext()
+  const navigateTo = useNavigate();
+  const { category, setCategoryData, categoryData } = useUserContext();
 
   const handlecategoryData = async () => {
+
     if (category === 'all') {
       navigateTo('/products')
     } else {
@@ -21,20 +22,24 @@ const CategoryProduct = () => {
         console.log(data)
         setCategoryData(data.products)
         console.log(data.products)
+
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }
+  };
 
   useEffect(() => {
+
     handlecategoryData()
   }, [category])
 
+
   return (
     <>
-      <div className='border border-green-500 flex gap-5'>
+      <div className="border border-green-500 flex gap-5">
         {categoryData.map((product) => {
+
           return (
             <Link to={`/singleProduct/${product._id}`} key={product._id}>
               <div className='w-full max-w-sm bg-white  rounded-lg m-3 px-5 border border-red-600 '>
@@ -66,10 +71,11 @@ const CategoryProduct = () => {
               </div>
             </Link>
           )
+
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CategoryProduct
+export default CategoryProduct;

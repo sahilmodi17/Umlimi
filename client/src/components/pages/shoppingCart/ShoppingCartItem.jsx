@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
@@ -31,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
   CloseButton: {
     position: "absolute",
-    top: "0", // Adjust as needed for the desired positioning
-    right: "0", // Adjust as needed for the desired positioning
+    top: "0",
+    right: "0",
     zIndex: 1,
   },
 }));
@@ -40,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ShoppingCartItem({
   id,
   img,
-  title,
+  name,
   price,
-  amount,
+  qty,
   category,
   size,
 }) {
@@ -66,52 +65,78 @@ export default function ShoppingCartItem({
           title="Live from space album cover"
         />
 
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
+        <Typography variant="body2" color="textSecondary" gutterBottom>
           {category}
         </Typography>
 
-        <Typography variant="div" component="h2">
-          {title}
-        </Typography>
-        <Typography variant="subtitle2">
-          <hr />
+        <Typography variant="h6" component="h2">
+          {name}
         </Typography>
         <Grid container>
-          <Grid item xs={11} sm={11} md={11} lg={11}>
+          {/* <Grid item xs={11} sm={11} md={11} lg={11}>
             <Typography variant="body1" component="div">
               Size
             </Typography>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1}>
-            <Typography variant="h6" component="div">
+            <Typography variant="body1" component="div">
               {size}
             </Typography>
-          </Grid>
+          </Grid> */}
           <Grid item xs={11} sm={11} md={11} lg={11}>
             <Typography variant="body1" component="div">
               Quantity
             </Typography>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1}>
-            <Typography variant="h6" component="div">
-              {amount}
-            </Typography>
-          </Grid>
-          <Grid item xs={10} sm={9} md={10} lg={10}>
             <Typography
               variant="body1"
               component="div"
-              style={{ fontWeight: "bold" }}
+              style={{ display: "flex" }}
             >
-              Price
+              <button className="w-5  text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer hover:text-gray-700  hover:bg-gray-300">
+                <span
+                  className="m-auto text-2xl font-thin"
+                  onClick={() => {
+                    decrease(id);
+                  }}
+                >
+                  -
+                </span>
+              </button>
+              <div
+                className=" flex justify-center w-5 font-semibold items-center text-gray-700  bg-gray-100 outline-none  focus:outline-none text-md hover:text-black"
+                // placeholder={qty}
+              >
+                {qty}
+              </div>
+              <button className="w-5 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer  dark hover:text-gray-700 hover:bg-gray-300">
+                <span
+                  className="m-auto text-2xl font-thin"
+                  onClick={() => {
+                    increase(id);
+                  }}
+                >
+                  +
+                </span>
+              </button>
             </Typography>
           </Grid>
-          <Grid item xs={2} sm={2} md={2} lg={1}>
-            <Typography variant="h6" component="div" color="black">
+          <Grid item xs={11} sm={11} md={11} lg={11}>
+            <Typography
+              variant="body1"
+              component="div"
+              style={{ paddingTop: "5px" }}
+            >
+              price
+            </Typography>
+          </Grid>
+          <Grid item xs={1} sm={1} md={1} lg={1}>
+            <Typography
+              variant="body1"
+              component="div"
+              style={{ paddingTop: "5px" }}
+            >
               ${price}
             </Typography>
           </Grid>
