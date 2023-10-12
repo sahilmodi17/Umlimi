@@ -28,8 +28,11 @@ const Navbar = () => {
   };
 
   const handleHome = () => {
-    navigateTo("/");
-  };
+
+    setCategory('')
+    navigateTo('/')
+  }
+
 
   const handleProfile = (e) => {
     if (e.target.value === "profile") navigateTo("/profile");
@@ -47,20 +50,32 @@ const Navbar = () => {
   // }
 
   const handleCategory = (e) => {
-    const selectedCategory = e.target.value;
-    setCategory(selectedCategory); // Update the category state
-  };
+
+    const selectedCategory = e.target.value
+    console.log(selectedCategory)
+    setCategory(selectedCategory) // Update the category state
+  }
 
   useEffect(() => {
     // The code inside this useEffect will execute when 'category' changes.
-    console.log(category); // Log the updated value of category
-
-    if (category === "All") {
-      navigateTo("/");
-    } else {
-      navigateTo("/categoryProduct");
+    console.log(category) // Log the updated value of category
+    // if (category === '') {
+    //   navigateTo('/')
+    // }
+    if (category === 'all') {
+      console.log('hellow')
+      navigateTo('/products')
     }
-  }, [category]);
+    if (category === 'fruit') {
+      console.log('hi')
+      navigateTo('/categoryProduct')
+    }
+    if (category === 'vegetable') {
+      console.log('hello')
+      navigateTo('/categoryProduct')
+    }
+  }, [category])
+
 
   // Add category as a dependency to useEffect
 
@@ -161,23 +176,28 @@ const Navbar = () => {
                     onChange={(e) => {
                       handleCategory(e);
                     }}
-                    value={category}
                   >
                     <option
-                      value="All"
-                      className="text-slate-700 text-sm font-semibold"
+
+                      value='all'
+                      className='text-slate-700 text-sm font-semibold'
+
                     >
                       All Categories
                     </option>
                     <option
-                      value="Fruits"
-                      className="text-slate-700 text-sm font-semibold"
+
+                      value='fruit'
+                      className='text-slate-700 text-sm font-semibold'
+
                     >
                       Fruits
                     </option>
                     <option
-                      value="Vegetables"
-                      className="text-slate-700 text-sm font-semibold"
+
+                      value='vegetable'
+                      className='text-slate-700 text-sm font-semibold'
+
                     >
                       Vegetables
                     </option>
