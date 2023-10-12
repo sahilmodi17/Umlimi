@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +33,19 @@ const useStyles = makeStyles({
 
 export default function OrderSummaryItem({ total }) {
   const classes = useStyles();
+  const navigateTo = useNavigate();
+  const handleProceed = async () => {
+    console.log("inside HandleProceed");
+    try {
+      const response = await axios.get("/api/v1/dashboard/profile", {
+        withCredentials: true,
+      });
+    } catch (error) {
+      // alert("please login");
+      console.log(error);
+      navigateTo("/login");
+    }
+  };
 
   return (
     <Card className={classes.root} elevation={15}>
@@ -130,7 +145,12 @@ export default function OrderSummaryItem({ total }) {
       </CardContent>
 
       <CardActions>
-        <Button size="large" color="green" className={classes.GreenButton}>
+        <Button
+          size="large"
+          color="green"
+          className={classes.GreenButton}
+          onClick={handleProceed}
+        >
           Proceed
         </Button>
       </CardActions>
