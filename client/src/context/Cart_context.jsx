@@ -10,7 +10,7 @@ const initialState = {
   loading: false,
   cart: cartData,
   total: 0,
-  amount: 0,
+  qty: 1,
 };
 
 const CartProvider = ({ children }) => {
@@ -42,6 +42,7 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_AMOUNT", payload: { id, type } });
   };
   const addToCart = (item) => {
+    console.log("cart context ma addtoCart", item);
     dispatch({ type: "ADD_TO_CART", payload: item });
   };
 
@@ -73,4 +74,4 @@ export const useCartContext = () => {
   return useContext(CartContext);
 };
 
-export { CartContext, CartProvider};
+export { CartContext, CartProvider };

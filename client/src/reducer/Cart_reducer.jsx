@@ -9,9 +9,12 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === "INCREASE") {
+    console.log("increase called");
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload) {
-        return { ...cartItem, amount: cartItem.amount + 1 };
+        console.log("Increasing quantity for item with ID", cartItem.id);
+        console.log("Before increase:", cartItem.qty);
+        return { ...cartItem, qty: cartItem.qty + 1 };
       }
       return cartItem;
     });
@@ -21,32 +24,49 @@ const reducer = (state, action) => {
     let tempCart = state.cart
       .map((cartItem) => {
         if (cartItem.id === action.payload) {
-          return { ...cartItem, amount: cartItem.amount - 1 };
+          return { ...cartItem, qty: cartItem.qty - 1 };
         }
         return cartItem;
       })
-      .filter((cartItem) => cartItem.amount !== 0);
+      .filter((cartItem) => cartItem.qty !== 0);
     return { ...state, cart: tempCart };
   }
+
   if (action.type === "GET_TOTALS") {
-    let { total, amount } = state.cart.reduce(
+    console.log("Calculating totals...");
+    console.log("Cart data:", state.cart);
+
+    let { total, qty } = state.cart.reduce(
       (cartTotal, cartItem) => {
-        const { price, amount } = cartItem;
-        const itemTotal = price * amount;
+        console.log("Processing item:", cartItem);
+
+        const { price } = cartItem;
+        const { qty } = cartItem;
+
+        if (price === undefined || qty === undefined) {
+          console.log("Missing price or qty for item:", cartItem);
+          return cartTotal;
+        }
+
+        const itemTotal = price * qty;
+        console.log("Item Total:", itemTotal);
 
         cartTotal.total += itemTotal;
-        cartTotal.amount += amount;
+        cartTotal.qty += qty;
         return cartTotal;
       },
       {
         total: 0,
-        amount: 0,
+        qty: 1,
       }
     );
-    total = parseFloat(total.toFixed(2));
 
-    return { ...state, total, amount };
+    total = parseFloat(total.toFixed(2));
+    console.log("Total:", total);
+
+    return { ...state, total, qty };
   }
+
   if (action.type === "LOADING") {
     return { ...state, loading: true };
   }
@@ -56,24 +76,24 @@ const reducer = (state, action) => {
   // Inside your reducer
   if (action.type === "ADD_TO_CART") {
     console.log("add to cart");
-    const newItem = action.payload; 
-    const existingItemIndex = state.cart.findIndex(
-      (item) => item.id === newItem.id
-    );
+    const newItem = action.payload;
+    console.log(newItem);
+    const existingItem = state.cart.find((item) => item.id === newItem.id);
 
-    if (existingItemIndex !== -1) {
-      const updatedCart = state.cart.map((item, index) => {
-        if (index === existingItemIndex) {
-          return { ...item, amount: item.amount + 1 };
+    if (existingItem) {
+      // If the item already exists in the cart, increase the quantity by 1.
+      const updatedCart = state.cart.map((item) => {
+        if (item.id === newItem.id) {
+          return { ...item, qty: item.qty + 1 };
         }
         return item;
       });
 
       return { ...state, cart: updatedCart };
     } else {
-      
+      // If the item doesn't exist in the cart, add it with a quantity of 1.
+      newItem.qty = 1;
       return { ...state, cart: [...state.cart, newItem] };
-
     }
   }
 
@@ -82,15 +102,15 @@ const reducer = (state, action) => {
       .map((cartItem) => {
         if (cartItem.id === action.payload.id) {
           if (action.payload.type === "inc") {
-            return { ...cartItem, amount: cartItem.amount + 1 };
+            return { ...cartItem, qty: cartItem.qty + 1 };
           }
           if (action.payload.type === "dec") {
-            return { ...cartItem, amount: cartItem.amount - 1 };
+            return { ...cartItem, qty: cartItem.qty - 1 };
           }
         }
         return cartItem;
       })
-      .filter((cartItem) => cartItem.amount !== 0);
+      .filter((cartItem) => cartItem.qty !== 0);
     return { ...state, cart: tempCart };
   }
   throw new Error("no matching action type");

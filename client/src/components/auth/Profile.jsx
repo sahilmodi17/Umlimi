@@ -16,11 +16,6 @@ const Profile = () => {
   const [state, setState] = useState("");
   const [userId, setUserId] = useState("");
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   const navigateTo = useNavigate();
 
   const getData = async () => {
@@ -129,18 +124,6 @@ const Profile = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button
-              type="button"
-              className=" px-4 py-2  mt-4"
-              onClick={openModal}
-              style={{ color: "#2929d1" }}
-            >
-              Verify Email
-            </button>
-
-            {isModalOpen && (
-              <PopUp_Dialog onClose={() => setIsModalOpen(false)} />
-            )}
           </div>
 
           {/* address */}

@@ -4,6 +4,7 @@ import { useUserContext } from "../../Context";
 import { AdminNavbar } from "./Sidebar";
 import { FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import ProductTable from "./ProductTable";
 
 const AdminProducts = () => {
   const { setSidebar } = useUserContext();
@@ -15,12 +16,12 @@ const AdminProducts = () => {
 
   return (
     <>
-      <div className=" flex h-[140vh] w-[80%]">
+      <div className=" flex min-h-[100vh] w-[80%]">
         <div className="container  bg-emerald-100">
           <AdminNavbar />
 
           <div className="flex flex-wrap ml-5 ">
-            <div className="w-[95%] h-[123vh] bg-white rounded-2xl shadow ml-2 p-5 pt-3">
+            <div className="w-[95%] min-h-[87vh] bg-white rounded-2xl shadow ml-2 p-5 pt-3">
               <div className=" h-16 items-center flex justify-between">
                 <div className="text-neutral-600 text-2xl font-bold  ">
                   All sections
@@ -42,11 +43,9 @@ const AdminProducts = () => {
                   <div>This Year</div>
                 </div>
               </div>
-              <div className="text-5xl flex justify-center items-center h-full ">
-                Products Page Coming Soon...
+              <div className="pt-2">
+                <ProductTable />
               </div>
-
-              {/* Write Your Code here  */}
             </div>
           </div>
         </div>

@@ -36,21 +36,21 @@ const UserSchema = new mongoose.Schema({
 
   address: {
     type: String,
-    required: [true, "Please provide address"],
+    // required: [true, "Please provide address"],
     trim: true,
     minlength: 3,
   },
 
   city: {
     type: String,
-    required: [true, "Please provide city"],
+    // required: [true, "Please provide city"],
     trim: true,
     minlength: 3,
   },
 
   state: {
     type: String,
-    required: [true, "Please provide first name"],
+    // required: [true, "Please provide first name"],
     trim: true,
     minlength: 3,
   },
