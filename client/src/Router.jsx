@@ -18,7 +18,7 @@ import SearchProduct from './components/pages/shoppingCart/SearchProduct'
 import CategoryProduct from './components/pages/shoppingCart/CategoryProduct'
 import Splash from './components/auth/Splash'
 import Product from './components/pages/product/Product'
-
+import EditProduct from './components/Admin/EditProduct'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -92,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: '/admin/addproduct',
         element: <AddProduct />,
+      },
+      {
+        path: '/admin/editproduct/:id',
+        element: <EditProduct />,
       },
     ],
   },
