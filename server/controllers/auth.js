@@ -257,6 +257,18 @@ const editUser = async (req, res) => {
   }
 };
 
+const getAllUser = async (req, res) => {
+  console.log("hi");
+  try {
+    const users = await User.find({});
+    res.send({ users });
+  } catch (error) {
+    return res.status(500).json({
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   adminRegister,
   adminLogin,
@@ -266,4 +278,5 @@ module.exports = {
   editUser,
   sendOtp,
   verifyOTP,
+  getAllUser,
 };

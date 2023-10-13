@@ -15,7 +15,7 @@ const SearchProduct = () => {
     searchproduct();
   }, [searchName]);
   return (
-    <div className="flex pl-2">
+    <div className="flex  pl-2">
       {searchData.map((product, index) => {
         return (
           <div

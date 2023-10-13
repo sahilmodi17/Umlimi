@@ -33,11 +33,11 @@ const CategoryProduct = () => {
 
   return (
     <>
-      <div className="border border-green-500 flex gap-5">
+      <div className=" flex  gap-5">
         {categoryData.map((product) => {
           return (
             <Link to={`/singleProduct/${product._id}`} key={product._id}>
-              <div className="w-full max-w-sm bg-white  rounded-lg m-3 px-5 border border-red-600 ">
+              <div className="w-full max-w-sm bg-white  rounded-lg m-3 px-5 border-2 border-gray-300 ">
                 <div className="flex justify-center">
                   <img
                     src={product.image1}
