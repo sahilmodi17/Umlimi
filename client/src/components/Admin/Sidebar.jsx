@@ -92,12 +92,7 @@ export const AdminNavbar = () => {
         <div className=" text-neutral-600 text-4xl font-bold h-[50%] ml-2">
           {sidebar}
         </div>
-        <div className="">
-          <input
-            className="w-96 h-10 bg-white rounded-lg pl-2 "
-            placeholder="Search for items..."
-          />
-        </div>
+        
         <div className=" h-[50%] mr-20">
           <div className=" flex justify-center items-center">
             <button className="ml-2 flex justify-center items-center ">

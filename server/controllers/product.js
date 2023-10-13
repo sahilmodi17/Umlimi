@@ -39,8 +39,11 @@ const addProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
+
+  console.log("inside the update product")
   const productId = req.params.productId;
   const data = req.body;
+  console.log(data)
 
   try {
     const updateProduct = await Product.findOneAndUpdate(
@@ -55,6 +58,23 @@ const updateProduct = async (req, res) => {
       throw `no porduct with id ${productId}`;
     } else {
       return res.status(200).json({ updateProduct });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      err: error,
+    });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  console.log("inside the deleteProduct method")
+  const productId = req.params.productId;
+  try {
+    const deleteProduct = await Product.findOneAndDelete({ _id: productId });
+    if (!deleteProduct) {
+      throw `no product with id ${productId}`;
+    } else {
+      return res.status(200).json({ deleteProduct });
     }
   } catch (error) {
     return res.status(500).json({
@@ -119,4 +139,5 @@ module.exports = {
   getProducts,
   getProductCategorywise,
   searchProduct,
+  deleteProduct
 };

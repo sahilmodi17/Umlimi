@@ -14,6 +14,8 @@ export const UserProvider = ({ children }) => {
   const [category, setCategory] = useState('')
   const [categoryData, setCategoryData] = useState([])
   const [allData, setAllData] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [allProducts, setAllProducts] = useState([])
   const searchproduct = async () => {
     console.log(searchName)
 
@@ -77,6 +79,10 @@ export const UserProvider = ({ children }) => {
         allProduct,
         allData,
         setAllData,
+        searchTerm,
+        setSearchTerm,
+        allProducts,
+        setAllProducts
       }}
     >
       {children}
