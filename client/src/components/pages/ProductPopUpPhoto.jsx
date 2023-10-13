@@ -31,7 +31,7 @@ const ProductPopUpInformation = ({ onClose, product }) => {
                 </h3>
               </div>
 
-              <div className="flex justify-center items-center border border-red-500 max-w-[80%] mx-auto p-5 whitespace-pre-wrap">
+              <div className="flex justify-center items-center  max-w-[80%] mx-auto p-5 whitespace-pre-wrap">
                 <img src={product} alt="" />
               </div>
 
