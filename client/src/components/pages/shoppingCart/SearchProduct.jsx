@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "../../../Context";
 import { useCartContext } from "../../../context/Cart_context";
 const SearchProduct = () => {
+
   const { addToCart } = useCartContext();
   const { searchproduct, searchData, searchName } = useUserContext();
 
@@ -15,6 +16,7 @@ const SearchProduct = () => {
     searchproduct();
   }, [searchName]);
   return (
+
     <div className="flex  pl-2">
       {searchData.map((product, index) => {
         return (
@@ -57,6 +59,7 @@ const SearchProduct = () => {
         );
       })}
     </div>
+
   );
 };
 
