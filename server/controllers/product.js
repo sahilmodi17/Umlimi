@@ -7,15 +7,9 @@ cloudinary.config({
   api_secret: "12wbhtfrPtU6AHlvoipsmLIdh8E",
 });
 const addProduct = async (req, res) => {
-<<<<<<< Updated upstream
-  const { name, price, qty, description, category } = req.body
-  const file = req.files.image1
-  console.log(req.body)
-=======
   const { name, price, qty, description, category } = req.body;
   const file = req.files.image1;
-
->>>>>>> Stashed changes
+  console.log(req.body);
   // console.log(req.files);
   // console.log(file)
   try {
@@ -46,17 +40,16 @@ const addProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-<<<<<<< Updated upstream
-  const { name, price, qty, description, category } = req.body
-  const productId = req.params.productId
+  const { name, price, qty, description, category } = req.body;
+  const productId = req.params.productId;
   // console.log(req.body)
-  const file = req?.files?.image1
+  const file = req?.files?.image1;
   // console.log(req?.files)
   // console.log(file)
   try {
     // Upload image to Cloudinary
-    const result = await cloudinary.uploader.upload(file.tempFilePath)
-    const image1 = result.url
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const image1 = result.url;
 
     const tempData = {
       name,
@@ -66,23 +59,7 @@ const updateProduct = async (req, res) => {
       category,
       outOfStock: false,
       image1,
-    }
-=======
-  console.log("inside the update product");
-  const productId = req.params.productId;
-  const data = req.body;
-  console.log(data);
-
-  const file = req?.files?.image1;
-  console.log(file);
-
-  try {
-    const result = await cloudinary.uploader.upload(file.tempFilePath);
-    const image1 = result.url;
-
-    const tempData = { ...data, image1 };
-    console.log(tempData);
->>>>>>> Stashed changes
+    };
 
     const updateProduct = await Product.findOneAndUpdate(
       { _id: productId },
@@ -98,16 +75,10 @@ const updateProduct = async (req, res) => {
       return res.status(200).json({ updateProduct });
     }
   } catch (error) {
-<<<<<<< Updated upstream
-    console.error(error)
+    console.error(error);
     return res
       .status(500)
-      .json({ err: 'Error uploading image or creating product' })
-=======
-    return res.status(500).json({
-      err: error,
-    });
->>>>>>> Stashed changes
+      .json({ err: "Error uploading image or creating product" });
   }
 };
 
@@ -162,7 +133,7 @@ const searchProduct = async (req, res) => {
     console.log(req.body);
 
     const products = await Product.find({
-      name: { $regex: ".*" + req.body.name + ".*", $options: "i" },
+      name: { $regex: "." + req.body.name + ".", $options: "i" },
     });
     if (products.length > 0) {
       res.status(200).send({ products });

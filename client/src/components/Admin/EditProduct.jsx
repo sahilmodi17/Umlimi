@@ -1,22 +1,11 @@
-<<<<<<< Updated upstream
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useUserContext } from '../../Context'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-const EditProduct = () => {
-  const { id } = useParams()
-  const { setAllProducts } = useUserContext()
-=======
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../../Context";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 const EditProduct = () => {
   const { id } = useParams();
-  const { allProducts, setAllProducts } = useUserContext();
->>>>>>> Stashed changes
+  const { setAllProducts } = useUserContext();
 
   const [editProduct, setEditProduct] = useState(null);
   const [formData, setFormData] = useState({
@@ -28,7 +17,7 @@ const EditProduct = () => {
     image1: null,
   });
 
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -78,34 +67,24 @@ const EditProduct = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    const formDataToSubmit = new FormData()
-    formDataToSubmit.append('name', formData.name)
-    formDataToSubmit.append('price', formData.price)
-    formDataToSubmit.append('category', formData.category)
-    formDataToSubmit.append('description', formData.description)
-    formDataToSubmit.append('qty', formData.qty)
-    formDataToSubmit.append('image1', formData.image1)
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("name", formData.name);
+    formDataToSubmit.append("price", formData.price);
+    formDataToSubmit.append("category", formData.category);
+    formDataToSubmit.append("description", formData.description);
+    formDataToSubmit.append("qty", formData.qty);
+    formDataToSubmit.append("image1", formData.image1);
 
-<<<<<<< Updated upstream
-    console.log('inside handle edit', formDataToSubmit)
+    console.log("inside handle edit", formDataToSubmit);
     try {
       const data = await axios.patch(
         `/api/v1/admin//updateProduct/${id}`,
         formDataToSubmit
-      )
-      if (data) {
-        alert('Product has been updated')
-        navigateTo('/admin/products')
-      }
-=======
-    console.log("inside handle edit", formData);
-    try {
-      const data = await axios.patch(
-        `/api/v1/admin//updateProduct/${id}`,
-        formData
       );
-      console.log(data);
->>>>>>> Stashed changes
+      if (data) {
+        alert("Product has been updated");
+        navigateTo("/admin/products");
+      }
     } catch (err) {
       console.log(err);
     }

@@ -5,14 +5,12 @@ import axios from "axios";
 import PopUp_Dialog from "../pages/PopUp_Dialog";
 import { useUserContext } from "../../Context";
 const Signup = () => {
-  const { email, setEmail, otp, setOTP } = useUserContext();
+  const { email, setEmail, otp, setOTP, userId, setUserId } = useUserContext();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const { userId, setUserId } = useUserContext();
 
   const [emailError, setEmailError] = useState();
   const [passwordError, setPasswordError] = useState();
@@ -58,10 +56,9 @@ const Signup = () => {
         const data = { firstName, lastName, email, password };
 
         const res = await axios.post("/api/v1/auth/user/register", data);
-        // console.log(res);
-        setOTP("");
-        // console.log();
         setUserId(res.data.newUser._id);
+
+        setOTP("");
         navigateTo("/");
       } catch (err) {
         console.log(err);
@@ -102,83 +99,42 @@ const Signup = () => {
 
   return (
     <>
-<<<<<<< Updated upstream
-      <div className='bg-emerald-100 h-[100vh] w-[100vw]'>
-        <div className='w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center'>
+      <div className="bg-emerald-100 h-[100vh] w-[100vw]">
+        <div className="w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center">
           {/* Title */}
-          <div className='mb-4 text-center'>
-            <span className='text-black text-3xl md:text-4xl lg:text-5xl font-semibold'>
-              Welcome to{' '}
+          <div className="mb-4 text-center">
+            <span className="text-black text-3xl md:text-4xl lg:text-5xl font-semibold">
+              Welcome to{" "}
             </span>
-            <span className='text-emerald-400 text-3xl md:text-4xl lg:text-5xl font-semibold'>
+            <span className="text-emerald-400 text-3xl md:text-4xl lg:text-5xl font-semibold">
               Umlimi!
             </span>
-=======
-      <div className="w-full pt-10 px-4 md:px-8 lg:px-16 flex flex-col items-center">
-        {/* Title */}
-        <div className="mb-4 text-center">
-          <span className="text-black text-3xl md:text-4xl lg:text-5xl font-semibold">
-            Welcome to{" "}
-          </span>
-          <span className="text-emerald-400 text-3xl md:text-4xl lg:text-5xl font-semibold">
-            Umlimi!
-          </span>
-        </div>
-
-        <div className="pt-3 w-full md:w-[60%] lg:w-[40%] ">
-          {/* Name Fields */}
-          <div className="flex  md:flex-row gap-5 md:gap-8">
-            <div className="w-[100%]">
-              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
-                First Name
-              </div>
-              <input
-                type="text"
-                name="first_name"
-                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
-                placeholder="Mehrab"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div className="w-[100%]">
-              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
-                Last Name
-              </div>
-              <input
-                type="text"
-                name="last_name"
-                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
-                placeholder="Bozorgi"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
->>>>>>> Stashed changes
           </div>
 
-          <div className='pt-3 w-full md:w-[60%] lg:w-[40%] '>
+          <div className="pt-3 w-full md:w-[60%] lg:w-[40%] ">
             {/* Name Fields */}
-            <div className='flex  md:flex-row gap-5 md:gap-8'>
-              <div className='w-[100%]'>
-                <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl '>
+            <div className="flex  md:flex-row gap-5 md:gap-8">
+              <div className="w-[100%]">
+                <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                   First Name
                 </div>
                 <input
-                  type='text'
-                  name='first_name'
-                  className='bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3'
-                  placeholder='Mehrab'
+                  type="text"
+                  name="first_name"
+                  className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                  placeholder="Mehrab"
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
-              <div className='w-[100%]'>
-                <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl '>
+              <div className="w-[100%]">
+                <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                   Last Name
                 </div>
                 <input
-                  type='text'
-                  name='last_name'
-                  className='bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3'
-                  placeholder='Bozorgi'
+                  type="text"
+                  name="last_name"
+                  className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                  placeholder="Bozorgi"
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
@@ -209,61 +165,32 @@ const Signup = () => {
               </span>
             )}
           </div> */}
-<<<<<<< Updated upstream
-            <div className='pt-3'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl'>
+            <div className="pt-3">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl">
                 Email
               </div>
               <input
-                type='email'
-                name='email'
+                type="email"
+                name="email"
                 disabled={otp && true}
-                className='bg-white w-[80%] rounded border border-zinc-500 h-12 px-3'
-                placeholder='Mehrabbozorgi.business@gmail.com'
+                className="bg-white w-[80%] rounded border border-zinc-500 h-12 px-3"
+                placeholder="Mehrabbozorgi.business@gmail.com"
                 value={email}
                 onChange={validateEmail}
               />
               {email && (
                 <button
-                  type='button'
-                  className=' px-4 py-2'
+                  type="button"
+                  className=" px-4 py-2"
                   onClick={() => {
-                    openModal()
-                    handleSendOTP()
+                    openModal();
+                    handleSendOTP();
                   }}
-                  style={{ color: '#2929d1' }}
+                  style={{ color: "#2929d1" }}
                 >
                   Verify Email
                 </button>
               )}
-=======
-          <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl">
-              Email
-            </div>
-            <input
-              type="email"
-              name="email"
-              disabled={otp && true}
-              className="bg-white w-[80%] rounded border border-zinc-500 h-12 px-3"
-              placeholder="Mehrabbozorgi.business@gmail.com"
-              value={email}
-              onChange={validateEmail}
-            />
-            {email && (
-              <button
-                type="button"
-                className=" px-4 py-2"
-                onClick={() => {
-                  openModal();
-                  handleSendOTP();
-                }}
-                style={{ color: "#2929d1" }}
-              >
-                Verify Email
-              </button>
-            )}
->>>>>>> Stashed changes
 
               {isModalOpen && (
                 <PopUp_Dialog onClose={() => setIsModalOpen(false)} />
@@ -272,31 +199,16 @@ const Signup = () => {
             {email && (
               <span
                 className={
-                  emailError === 'Valid Email'
-                    ? 'text-green-500'
-                    : 'text-red-500'
+                  emailError === "Valid Email"
+                    ? "text-green-500"
+                    : "text-red-500"
                 }
               >
                 {emailError}
               </span>
             )}
-<<<<<<< Updated upstream
-            {otp && <span className='text-green-500'>Email verified</span>}
+            {otp && <span className="text-green-500">Email verified</span>}
             {/* {email && (
-=======
-          </div>
-          {email && (
-            <span
-              className={
-                emailError === "Valid Email" ? "text-green-500" : "text-red-500"
-              }
-            >
-              {emailError}
-            </span>
-          )}
-          {otp && <span className="text-green-500">Email verified</span>}
-          {/* {email && (
->>>>>>> Stashed changes
             <div className='flex gap-5'>
               <button
                 className='bg-white rounded-sm border h-9 px-3 text-emerald-400 border-emerald-400 hover:cursor-pointer'
@@ -316,26 +228,25 @@ const Signup = () => {
             </div>
           )} */}
 
-<<<<<<< Updated upstream
             {/* Password */}
-            <div className='pt-3'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl '>
+            <div className="pt-3">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                 Set Password
               </div>
               <input
-                type='password'
-                name='password'
+                type="password"
+                name="password"
                 value={password}
-                className='bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3'
-                placeholder='Enter your password'
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                placeholder="Enter your password"
                 onChange={validatePassword}
               />
               {password && (
                 <span
                   className={
-                    passwordError === 'Strong Password'
-                      ? 'text-green-500'
-                      : 'text-red-500'
+                    passwordError === "Strong Password"
+                      ? "text-green-500"
+                      : "text-red-500"
                   }
                 >
                   {passwordError}
@@ -344,83 +255,30 @@ const Signup = () => {
             </div>
 
             {/* Confirm Password */}
-            <div className='pt-3'>
-              <div className='text-zinc-900 text-lg md:text-xl lg:text-2xl '>
+            <div className="pt-3">
+              <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
                 Confirm Password
               </div>
               <input
-                type='password'
-                name='confirm_password'
+                type="password"
+                name="confirm_password"
                 value={confirmPassword}
-                className='bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3'
-                placeholder='Confirm your password'
+                className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
+                placeholder="Confirm your password"
                 onChange={handleConfirmPassword}
               />
               {confirmPassword && (
                 <span
                   className={
-                    confirmPasswordError === 'Passwords match'
-                      ? 'text-green-500'
-                      : 'text-red-500'
+                    confirmPasswordError === "Passwords match"
+                      ? "text-green-500"
+                      : "text-red-500"
                   }
                 >
                   {confirmPasswordError}
                 </span>
               )}
             </div>
-=======
-          {/* Password */}
-          <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
-              Set Password
-            </div>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
-              placeholder="Enter your password"
-              onChange={validatePassword}
-            />
-            {password && (
-              <span
-                className={
-                  passwordError === "Strong Password"
-                    ? "text-green-500"
-                    : "text-red-500"
-                }
-              >
-                {passwordError}
-              </span>
-            )}
-          </div>
-
-          {/* Confirm Password */}
-          <div className="pt-3">
-            <div className="text-zinc-900 text-lg md:text-xl lg:text-2xl ">
-              Confirm Password
-            </div>
-            <input
-              type="password"
-              name="confirm_password"
-              value={confirmPassword}
-              className="bg-white w-full rounded border-2 border-gray-300 p-2 mt-2 h-12 px-3"
-              placeholder="Confirm your password"
-              onChange={handleConfirmPassword}
-            />
-            {confirmPassword && (
-              <span
-                className={
-                  confirmPasswordError === "Passwords match"
-                    ? "text-green-500"
-                    : "text-red-500"
-                }
-              >
-                {confirmPasswordError}
-              </span>
-            )}
-          </div>
->>>>>>> Stashed changes
 
             {/* Gender and DOB */}
             {/* <div className="flex flex-col md:flex-row md:gap-8 pt-3">
@@ -460,76 +318,40 @@ const Signup = () => {
             </div>
           </div> */}
 
-<<<<<<< Updated upstream
             {/* Buttons */}
-            <div className='mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4'>
+            <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
               <button
-                type='button'
-                className='bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer'
+                type="button"
+                className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
                 onClick={handleReset}
               >
-                <div className='text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2'>
+                <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
                   Reset
                 </div>
               </button>
               <button
-                type='button'
-                className='bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer'
+                type="button"
+                className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
                 onClick={handleRegister}
               >
-                <div className='text-white text-lg md:text-xl lg:text-2xl font-semibold p-2'>
+                <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
                   Register
                 </div>
               </button>
             </div>
 
             {/* Login Prompt */}
-            <div className='mt-4 text-center'>
-              <span className='text-black text-lg md:text-xl lg:text-2xl font-semibold'>
-                Already have an account?{' '}
+            <div className="mt-4 text-center">
+              <span className="text-black text-lg md:text-xl lg:text-2xl font-semibold">
+                Already have an account?{" "}
               </span>
               <span
-                className='text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold hover:cursor-pointer'
-                onClick={() => navigateTo('/login')}
+                className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold hover:cursor-pointer"
+                onClick={() => navigateTo("/login")}
               >
                 Log in
               </span>
             </div>
-=======
-          {/* Buttons */}
-          <div className="mt-6 flex flex-col md:flex-row md:justify-center md:items-center gap-4">
-            <button
-              type="button"
-              className="bg-white rounded-sm border border-emerald-400 w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={handleReset}
-            >
-              <div className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-normal p-2">
-                Reset
-              </div>
-            </button>
-            <button
-              type="button"
-              className="bg-emerald-400 rounded-sm w-full md:w-32 lg:w-40 hover:cursor-pointer"
-              onClick={handleRegister}
-            >
-              <div className="text-white text-lg md:text-xl lg:text-2xl font-semibold p-2">
-                Register
-              </div>
-            </button>
-          </div>
-
-          {/* Login Prompt */}
-          <div className="mt-4 text-center">
-            <span className="text-black text-lg md:text-xl lg:text-2xl font-semibold">
-              Already have an account?{" "}
-            </span>
-            <span
-              className="text-emerald-400 text-lg md:text-xl lg:text-2xl font-semibold hover:cursor-pointer"
-              onClick={() => navigateTo("/login")}
-            >
-              Log in
-            </span>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
