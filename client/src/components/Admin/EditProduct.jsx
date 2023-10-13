@@ -5,39 +5,52 @@ import axios from 'axios'
 
 const EditProduct = () => {
   const { id } = useParams()
-  const { allProducts } = useUserContext()
+  const { allProducts, setAllProducts } = useUserContext()
 
-  // Find the product by id
-  const editProduct = allProducts.find((item) => item._id === id)
-
-  // Initialize formData with the existing product data
+  const [editProduct, setEditProduct] = useState(null)
   const [formData, setFormData] = useState({
-    name: editProduct.name,
-    price: editProduct.price,
-    description: editProduct.description,
-    category: editProduct.category,
-    qty: editProduct.qty,
-    image1: editProduct.image1, // You can set this to null if you want to handle image updates separately
+    name: '',
+    price: '',
+    description: '',
+    category: '',
+    qty: '',
+    image1: null,
   })
 
-  // Update formData when the editProduct changes
-//   useEffect(() => {
-//     setFormData({
-//       name: editProduct.name,
-//       price: editProduct.price,
-//       description: editProduct.description,
-//       category: editProduct.category,
-//       qty: editProduct.qty,
-//       image1: null, // Set this to null if you want to handle image updates separately
-//     })
-//   }, [editProduct])
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get('/api/v1/admin/getAllProducts')
+      setAllProducts(data.products)
+      const productToEdit = data.products.find((item) => item._id === id)
+      setEditProduct(productToEdit)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [id])
+
+  useEffect(() => {
+    if (editProduct) {
+      // When editProduct is available, set formData based on it
+      setFormData({
+        name: editProduct.name,
+        price: editProduct.price,
+        description: editProduct.description,
+        category: editProduct.category,
+        qty: editProduct.qty,
+        image1: null, // Set this to null if you want to handle image updates separately
+      })
+    }
+  }, [editProduct])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    console.log(name, value)
     setFormData({
       ...formData,
-      name: value,
+      [name]: value,
     })
   }
 
@@ -45,7 +58,7 @@ const EditProduct = () => {
     const file = e.target.files[0]
     setFormData({
       ...formData,
-      image1: file,
+      [e.target.name]: file,
     })
   }
 
@@ -60,7 +73,7 @@ const EditProduct = () => {
     // formDataToSubmit.append('qty', formData.qty)
     // formDataToSubmit.append('image1', formData.image1)
 
-    console.log("inside handle edit", formData)
+    console.log('inside handle edit', formData)
     try {
       const data = await axios.patch(
         `/api/v1/admin//updateProduct/${id}`,
