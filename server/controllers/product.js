@@ -9,8 +9,9 @@ cloudinary.config({
 const addProduct = async (req, res) => {
   const { name, price, qty, description, category } = req.body
   const file = req.files.image1
-
+  console.log(req.body)
   // console.log(req.files);
+  // console.log(file)
   try {
     // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(file.tempFilePath)
@@ -39,20 +40,26 @@ const addProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-  console.log('inside the update product')
+  const { name, price, qty, description, category } = req.body
   const productId = req.params.productId
-  const data = req.body
-  console.log(data)
-
+  // console.log(req.body)
   const file = req?.files?.image1
-  console.log(file)
-
+  // console.log(req?.files)
+  // console.log(file)
   try {
+    // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(file.tempFilePath)
     const image1 = result.url
 
-    const tempData = { ...data, image1 }
-    console.log(tempData)
+    const tempData = {
+      name,
+      price,
+      qty,
+      description,
+      category,
+      outOfStock: false,
+      image1,
+    }
 
     const updateProduct = await Product.findOneAndUpdate(
       { _id: productId },
@@ -68,9 +75,10 @@ const updateProduct = async (req, res) => {
       return res.status(200).json({ updateProduct })
     }
   } catch (error) {
-    return res.status(500).json({
-      err: error,
-    })
+    console.error(error)
+    return res
+      .status(500)
+      .json({ err: 'Error uploading image or creating product' })
   }
 }
 

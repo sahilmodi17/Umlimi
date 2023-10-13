@@ -1,134 +1,141 @@
-import axios from "axios";
-import React, { useState } from "react";
-
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 const AddProduct = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    price: "",
-    description: "",
-    category: "",
-    qty: "",
+    name: '',
+    price: '',
+    description: '',
+    category: '',
+    qty: '',
     image1: null,
     // image2: null,
     // image3: null,
-  });
+  })
+
+  const navigateTo = useNavigate()
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({
       ...formData,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     setFormData({
       ...formData,
       [e.target.name]: file,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const formDataToSubmit = new FormData();
-    formDataToSubmit.append("name", formData.name);
-    formDataToSubmit.append("price", formData.price);
-    formDataToSubmit.append("category", formData.category);
-    formDataToSubmit.append("description", formData.description);
-    formDataToSubmit.append("qty", formData.qty);
+    const formDataToSubmit = new FormData()
+    formDataToSubmit.append('name', formData.name)
+    formDataToSubmit.append('price', formData.price)
+    formDataToSubmit.append('category', formData.category)
+    formDataToSubmit.append('description', formData.description)
+    formDataToSubmit.append('qty', formData.qty)
 
-    formDataToSubmit.append("image1", formData.image1);
+    formDataToSubmit.append('image1', formData.image1)
     // formDataToSubmit.append('image2', formData.image2);
     // formDataToSubmit.append('image3', formData.image3);
-
+    console.log(formDataToSubmit)
     try {
       const data = await axios.post(
-        "/api/v1/admin/addProduct",
+        '/api/v1/admin/addProduct',
         formDataToSubmit
-      );
-      console.log(data);
+      )
+      console.log(data)
+
+      if (data) {
+        alert('product has been added')
+        navigateTo('/admin/products')
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <>
-      <div className="bg-emerald-100 h-[140vh] w-[80%]">
-        <div className=" bg-white w-[95%] h-[123vh] rounded-2xl shadow m-8">
-          <div className="text-4xl text-neutral-600 font-quicksand flex justify-center p-3">
+      <div className='bg-emerald-100 h-[140vh] w-[80%]'>
+        <div className=' bg-white w-[95%] h-[123vh] rounded-2xl shadow m-8'>
+          <div className='text-4xl text-neutral-600 font-quicksand flex justify-center p-3'>
             Add New Product
           </div>
 
-          <div className="p-8 pl-10">
+          <div className='p-8 pl-10'>
             <div>
-              <label htmlFor="Name" className="text-2xl">
-                Name <span className="ml-16"> : </span>
+              <label htmlFor='Name' className='text-2xl'>
+                Name <span className='ml-16'> : </span>
               </label>
               <input
-                type="text"
-                name="name"
+                type='text'
+                name='name'
                 onChange={handleInputChange}
-                placeholder="Enter the product name..."
-                className="bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none"
+                placeholder='Enter the product name...'
+                className='bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none'
               />
             </div>
-            <div className="my-7">
-              <label htmlFor="Price" className="text-2xl">
-                Category <span className="ml-5   pl-3"> : </span>
+            <div className='my-7'>
+              <label htmlFor='Price' className='text-2xl'>
+                Category <span className='ml-5   pl-3'> : </span>
               </label>
               <input
-                type="text"
-                name="category"
+                type='text'
+                name='category'
                 onChange={handleInputChange}
-                placeholder="Enter the product Category..."
-                className="bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none"
+                placeholder='Enter the product Category...'
+                className='bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none'
               />
             </div>
-            <div className="my-7">
-              <label htmlFor="Price" className="text-2xl">
-                Price <span className="ml-16 pl-3"> : </span>
+            <div className='my-7'>
+              <label htmlFor='Price' className='text-2xl'>
+                Price <span className='ml-16 pl-3'> : </span>
               </label>
               <input
-                type="number"
-                name="price"
+                type='number'
+                name='price'
                 onChange={handleInputChange}
-                placeholder="Enter the product price..."
-                className="bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none"
+                placeholder='Enter the product price...'
+                className='bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none'
               />
             </div>
-            <div className="my-7">
-              <label htmlFor="Quantity" className="text-2xl">
-                Quantity <span className="ml-9"> : </span>
+            <div className='my-7'>
+              <label htmlFor='Quantity' className='text-2xl'>
+                Quantity <span className='ml-9'> : </span>
               </label>
               <input
-                type="number"
-                name="qty"
+                type='number'
+                name='qty'
                 onChange={handleInputChange}
-                placeholder="Enter the product Qty..."
-                className="bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none"
+                placeholder='Enter the product Qty...'
+                className='bg-zinc-200 p-2 pl-4 ml-2 rounded-lg text-xl w-[80%] outline-none'
               />
             </div>
-            <div className="my-7 flex text-start">
-              <label htmlFor="Description" className="text-2xl">
-                Description <span className="ml-2"> : </span>
+            <div className='my-7 flex text-start'>
+              <label htmlFor='Description' className='text-2xl'>
+                Description <span className='ml-2'> : </span>
               </label>
               <textarea
-                name="description"
-                id="description"
-                cols="112"
-                rows="10"
+                name='description'
+                id='description'
+                cols='112'
+                rows='10'
                 onChange={handleInputChange}
-                className="bg-zinc-200 rounded-2xl ml-4 outline-none p-2 pl-4"
+                className='bg-zinc-200 rounded-2xl ml-4 outline-none p-2 pl-4'
               ></textarea>
             </div>
-            <div className="my-7 flex text-start">
-              <input type="file" name="image1" onChange={handleFileChange} />
+            <div className='my-7 flex text-start'>
+              <input type='file' name='image1' onChange={handleFileChange} />
             </div>
-            <div className="my-7 flex text-start">
-              <button className="bg-emerald-400 p-3" onClick={handleSubmit}>
+            <div className='my-7 flex text-start'>
+              <button className='bg-emerald-400 p-3' onClick={handleSubmit}>
                 Submit
               </button>
             </div>
@@ -136,7 +143,7 @@ const AddProduct = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AddProduct;
+export default AddProduct
