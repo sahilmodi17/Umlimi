@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShoppingCartItem({
-  id,
+  _id,
   img,
   name,
   price,
@@ -55,7 +55,7 @@ export default function ShoppingCartItem({
           className={classes.CloseButton}
           color="inherit"
           aria-label="close"
-          onClick={() => remove(id)}
+          onClick={() => remove(_id)}
         >
           <CloseIcon />
         </IconButton>
@@ -98,7 +98,7 @@ export default function ShoppingCartItem({
                 <span
                   className="m-auto text-2xl font-thin"
                   onClick={() => {
-                    decrease(id);
+                    decrease(_id);
                   }}
                 >
                   -
@@ -114,7 +114,7 @@ export default function ShoppingCartItem({
                 <span
                   className="m-auto text-2xl font-thin"
                   onClick={() => {
-                    increase(id);
+                    increase(_id);
                   }}
                 >
                   +

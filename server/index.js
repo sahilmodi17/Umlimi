@@ -8,8 +8,10 @@ const auth = require("./routes/auth");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const authentication = require("./middleware/authentication");
+
 const dashboardRouter = require("./routes/dashboardRouter");
 const productrouter = require("./routes/product");
+const orderRouter = require("./routes/order");
 
 const fileUpload = require("express-fileupload");
 
@@ -31,6 +33,7 @@ app.use(
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/admin", productrouter);
 app.use("/api/v1/dashboard", authentication, dashboardRouter);
+app.use("/api/v1/order", orderRouter);
 
 const start = async () => {
   console.log("this time");

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { featuredProducts } from "../Temp";
@@ -8,12 +7,10 @@ import { useCartContext } from "../../../context/Cart_context";
 
 const SingleProduct = () => {
   const { qty } = useCartContext();
-  console.log(qty);
   const { id } = useParams();
   const { addToCart } = useCartContext();
   const { searchproduct, isSearch, searchName, searchData, setIsSearch } =
     useUserContext();
-
 
   let product = featuredProducts.filter((item) => {
     return item.id === id;
@@ -24,6 +21,8 @@ const SingleProduct = () => {
       return item._id === id;
     });
   }
+  // console.log(product);
+  // console.log(searchData);
 
   const handleAddToCart = (product) => {
     console.log("singlePRoduct ma handleAddtoCart", product[0]);
@@ -40,11 +39,9 @@ const SingleProduct = () => {
                 <div className="sticky top-0 overflow-hidden ">
                   <div className="relative mb-6 lg:mb-10 lg:h-96">
                     <img
-
                       className="object-contain w-full lg:h-full"
                       src={product[0]?.image1}
                       alt=""
-
                     />
                   </div>
                 </div>

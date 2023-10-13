@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
 import axios from "axios";
+import { useUserContext } from "../../Context";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState();
   const [passwordError, setPasswordError] = useState();
-
+  const { userId, setUserId } = useUserContext();
   const navigateTo = useNavigate();
 
   const handleReset = () => {
@@ -24,8 +25,18 @@ const Login = () => {
         const data = { email, password };
 
         const res = await axios.post("/api/v1/auth/user/login", data);
-        console.log(res);
-        navigateTo("/");
+
+        setUserId(res.data.user._id);
+        console.log(res.data.user);
+
+        if (
+          res.data.user.firstName === "admin" &&
+          res.data.user.email === "surjit.singhss1010@gmail.com"
+        ) {
+          navigateTo("/admin/dashboard");
+        } else {
+          navigateTo("/");
+        }
       } catch (err) {
         console.log(err);
         alert("please enter valid credentials");
@@ -55,7 +66,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" bg-emerald-100 h-[100vh] w-[100vw] flex justify-center items-center">
+      <div className=" bg-emerald-100 h-[100vh] w-[100vw]  flex justify-center items-center ">
         <div className=" sm:w-[60%] sm:h-[60%]">
           <div className="font-quicksand text-5xl mb-3">
             <span className="">Welcome </span>

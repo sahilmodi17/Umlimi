@@ -1,54 +1,56 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-const UserContext = React.createContext()
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+const UserContext = React.createContext();
 
 export const UserProvider = ({ children }) => {
-  const [data, setData] = useState('')
-  const [searchData, setSearchData] = useState([])
-  const [sidebar, setSidebar] = useState('dashboard')
-  const [searchName, setSearchName] = useState('')
-  const [isSearch, setIsSearch] = useState(false)
-  const [email, setEmail] = useState('')
-  const [otp, setOTP] = useState('')
-  const [category, setCategory] = useState('')
-  const [categoryData, setCategoryData] = useState([])
-  const [allData, setAllData] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [allProducts, setAllProducts] = useState([])
+  const [data, setData] = useState("");
+  const [searchData, setSearchData] = useState([]);
+  const [sidebar, setSidebar] = useState("dashboard");
+  const [searchName, setSearchName] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
+  const [email, setEmail] = useState("");
+  const [otp, setOTP] = useState("");
+  const [category, setCategory] = useState("");
+  const [categoryData, setCategoryData] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
   const searchproduct = async () => {
-    console.log(searchName)
+    console.log(searchName);
 
-    if (searchName == '') {
-      setIsSearch(false)
-      setSearchData([])
+    if (searchName == "") {
+      setIsSearch(false);
+      setSearchData([]);
     } else {
-      setIsSearch(true)
+      setIsSearch(true);
 
       try {
-        const { data } = await axios.post('/api/v1/admin/searchproduct', {
+        const { data } = await axios.post("/api/v1/admin/searchproduct", {
           name: searchName,
-        })
+        });
 
-        setSearchData(data.products)
-        console.log(data)
-        console.log(data.products)
+        setSearchData(data.products);
+        console.log(data);
+        console.log(data.products);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }
+  };
 
   const allProduct = async () => {
     try {
-      const { data } = await axios.get('/api/v1/admin/getAllProducts')
-      setAllData(data.products)
+      const { data } = await axios.get("/api/v1/admin/getAllProducts");
+      setAllData(data.products);
       // console.log(data)
       // console.log(data.products)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // useEffect(() => {
   //   searchproduct()
@@ -82,14 +84,18 @@ export const UserProvider = ({ children }) => {
         searchTerm,
         setSearchTerm,
         allProducts,
-        setAllProducts
+        setAllProducts,
+        userId,
+        setUserId,
+        allUsers,
+        setAllUsers,
       }}
     >
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};
 
 export const useUserContext = () => {
-  return useContext(UserContext)
-}
+  return useContext(UserContext);
+};
