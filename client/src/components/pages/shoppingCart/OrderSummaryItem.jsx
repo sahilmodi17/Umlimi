@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useUserContext } from "../../../Context";
+import { useCartContext } from "../../../context/Cart_context";
 
 const useStyles = makeStyles({
   root: {
@@ -31,18 +33,54 @@ const useStyles = makeStyles({
   },
 });
 
+const formatCartToOrders = (cart, userId) => {
+  const products = cart.map((item) => ({
+    productId: item._id,
+    qty: item.qty,
+  }));
+
+  return {
+    userId,
+    products,
+  };
+};
+
 export default function OrderSummaryItem({ total }) {
   const classes = useStyles();
   const navigateTo = useNavigate();
-  const handleProceed = async () => {
-    console.log("inside HandleProceed");
+  const { userId, setUserId } = useUserContext();
+  const { cart, clearCart } = useCartContext();
+  console.log(cart);
+
+  const handleProceed = async (e) => {
     try {
-      const response = await axios.get("/api/v1/dashboard/profile", {
-        withCredentials: true,
-      });
-    } catch (error) {
-      // alert("please login");
-      console.log(error);
+      console.log(userId);
+      if (!userId) {
+        const userResponse = await axios.get("/api/v1/dashboard/profile", {
+          withCredentials: true,
+        });
+        console.log(userResponse);
+        const newUserId = userResponse.data.user._id;
+        setUserId(newUserId);
+      }
+
+      const orderData = formatCartToOrders(cart, userId);
+      console.log(orderData);
+
+      try {
+        const response = await axios.post(
+          "/api/v1/order/placeOrder",
+          orderData
+        );
+        alert("Order Placed Sucessfully");
+        console.log("Order placed:", response.data);
+        clearCart();
+      } catch (orderError) {
+        console.error("Error placing the order:", orderError);
+      }
+    } catch (profileError) {
+      console.error("Error getting user profile:", profileError);
+
       navigateTo("/login");
     }
   };

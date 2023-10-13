@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
@@ -8,6 +9,20 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState()
   const [passwordError, setPasswordError] = useState()
+=======
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import validator from "validator";
+import axios from "axios";
+import { useUserContext } from "../../Context";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setPasswordError] = useState();
+  const { userId, setUserId } = useUserContext();
+>>>>>>> Stashed changes
 
   const navigateTo = useNavigate()
 
@@ -23,9 +38,16 @@ const Login = () => {
       try {
         const data = { email, password }
 
+<<<<<<< Updated upstream
         const res = await axios.post('/api/v1/auth/user/login', data)
         console.log(res)
         navigateTo('/')
+=======
+        const res = await axios.post("/api/v1/auth/user/login", data);
+        console.log(res);
+        setUserId(res.data.user._id);
+        navigateTo("/");
+>>>>>>> Stashed changes
       } catch (err) {
         console.log(err)
         alert('please enter valid credentials')

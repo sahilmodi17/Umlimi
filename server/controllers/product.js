@@ -1,21 +1,27 @@
-const Product = require('../models/Product')
-const cloudinary = require('cloudinary').v2
+const Product = require("../models/Product");
+const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-  cloud_name: 'drt8zrvjx',
-  api_key: '651992168492543',
-  api_secret: '12wbhtfrPtU6AHlvoipsmLIdh8E',
-})
+  cloud_name: "drt8zrvjx",
+  api_key: "651992168492543",
+  api_secret: "12wbhtfrPtU6AHlvoipsmLIdh8E",
+});
 const addProduct = async (req, res) => {
+<<<<<<< Updated upstream
   const { name, price, qty, description, category } = req.body
   const file = req.files.image1
   console.log(req.body)
+=======
+  const { name, price, qty, description, category } = req.body;
+  const file = req.files.image1;
+
+>>>>>>> Stashed changes
   // console.log(req.files);
   // console.log(file)
   try {
     // Upload image to Cloudinary
-    const result = await cloudinary.uploader.upload(file.tempFilePath)
-    const image1 = result.url
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const image1 = result.url;
 
     const tempData = {
       name,
@@ -25,21 +31,22 @@ const addProduct = async (req, res) => {
       category,
       outOfStock: false,
       image1,
-    }
+    };
 
     // Create product with image URL
-    const product = await Product.create(tempData)
+    const product = await Product.create(tempData);
 
-    return res.status(200).json({ msg: 'Data entered', product })
+    return res.status(200).json({ msg: "Data entered", product });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res
       .status(500)
-      .json({ err: 'Error uploading image or creating product' })
+      .json({ err: "Error uploading image or creating product" });
   }
-}
+};
 
 const updateProduct = async (req, res) => {
+<<<<<<< Updated upstream
   const { name, price, qty, description, category } = req.body
   const productId = req.params.productId
   // console.log(req.body)
@@ -60,6 +67,22 @@ const updateProduct = async (req, res) => {
       outOfStock: false,
       image1,
     }
+=======
+  console.log("inside the update product");
+  const productId = req.params.productId;
+  const data = req.body;
+  console.log(data);
+
+  const file = req?.files?.image1;
+  console.log(file);
+
+  try {
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const image1 = result.url;
+
+    const tempData = { ...data, image1 };
+    console.log(tempData);
+>>>>>>> Stashed changes
 
     const updateProduct = await Product.findOneAndUpdate(
       { _id: productId },
@@ -68,85 +91,91 @@ const updateProduct = async (req, res) => {
         new: true,
         runValidator: true,
       }
-    )
+    );
     if (!updateProduct) {
-      throw `no porduct with id ${productId}`
+      throw `no porduct with id ${productId}`;
     } else {
-      return res.status(200).json({ updateProduct })
+      return res.status(200).json({ updateProduct });
     }
   } catch (error) {
+<<<<<<< Updated upstream
     console.error(error)
     return res
       .status(500)
       .json({ err: 'Error uploading image or creating product' })
+=======
+    return res.status(500).json({
+      err: error,
+    });
+>>>>>>> Stashed changes
   }
-}
+};
 
 const deleteProduct = async (req, res) => {
-  console.log('inside the deleteProduct method')
-  const productId = req.params.productId
+  console.log("inside the deleteProduct method");
+  const productId = req.params.productId;
   try {
-    const deleteProduct = await Product.findOneAndDelete({ _id: productId })
+    const deleteProduct = await Product.findOneAndDelete({ _id: productId });
     if (!deleteProduct) {
-      throw `no product with id ${productId}`
+      throw `no product with id ${productId}`;
     } else {
-      return res.status(200).json({ deleteProduct })
+      return res.status(200).json({ deleteProduct });
     }
   } catch (error) {
     return res.status(500).json({
       err: error,
-    })
+    });
   }
-}
+};
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({})
-    res.send({ products })
+    const products = await Product.find({});
+    res.send({ products });
   } catch (error) {
     return res.status(500).json({
       err: error,
-    })
+    });
   }
-}
+};
 
 const getProductCategorywise = async (req, res) => {
   try {
     // console.log('inside getProductCategorywise')
-    console.log(req.query.category)
-    const products = await Product.find({ category: req.query.category })
-    console.log(products)
+    console.log(req.query.category);
+    const products = await Product.find({ category: req.query.category });
+    console.log(products);
 
     if (!products) {
-      throw 'invalid category'
+      throw "invalid category";
     }
-    res.send({ products })
+    res.send({ products });
   } catch (error) {
     return res.status(500).json({
       err: error,
-    })
+    });
   }
-}
+};
 
 const searchProduct = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
 
     const products = await Product.find({
-      name: { $regex: '.*' + req.body.name + '.*', $options: 'i' },
-    })
+      name: { $regex: ".*" + req.body.name + ".*", $options: "i" },
+    });
     if (products.length > 0) {
-      res.status(200).send({ products })
+      res.status(200).send({ products });
     } else {
-      res.status(200).send({ products })
+      res.status(200).send({ products });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({
       err: error,
-    })
+    });
   }
-}
+};
 
 module.exports = {
   addProduct,
@@ -155,4 +184,4 @@ module.exports = {
   getProductCategorywise,
   searchProduct,
   deleteProduct,
-}
+};

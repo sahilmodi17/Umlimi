@@ -3,15 +3,16 @@ const reducer = (state, action) => {
     return { ...state, cart: [] };
   }
   if (action.type === "REMOVE") {
+    console.log(action.payload);
     return {
       ...state,
-      cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
+      cart: state.cart.filter((cartItem) => cartItem._id !== action.payload),
     };
   }
   if (action.type === "INCREASE") {
     console.log("increase called");
     let tempCart = state.cart.map((cartItem) => {
-      if (cartItem.id === action.payload) {
+      if (cartItem._id === action.payload) {
         console.log("Increasing quantity for item with ID", cartItem.id);
         console.log("Before increase:", cartItem.qty);
         return { ...cartItem, qty: cartItem.qty + 1 };
@@ -23,7 +24,7 @@ const reducer = (state, action) => {
   if (action.type === "DECREASE") {
     let tempCart = state.cart
       .map((cartItem) => {
-        if (cartItem.id === action.payload) {
+        if (cartItem._id === action.payload) {
           return { ...cartItem, qty: cartItem.qty - 1 };
         }
         return cartItem;
@@ -78,12 +79,13 @@ const reducer = (state, action) => {
     console.log("add to cart");
     const newItem = action.payload;
     console.log(newItem);
-    const existingItem = state.cart.find((item) => item.id === newItem.id);
+    const existingItem = state.cart.find((item) => item._id === newItem._id);
 
     if (existingItem) {
       // If the item already exists in the cart, increase the quantity by 1.
+      console.log("Ex");
       const updatedCart = state.cart.map((item) => {
-        if (item.id === newItem.id) {
+        if (item._id === newItem._id) {
           return { ...item, qty: item.qty + 1 };
         }
         return item;
