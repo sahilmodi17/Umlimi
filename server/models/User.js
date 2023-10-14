@@ -3,6 +3,18 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+const cartItemSchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+  qty: {
+    type: Number,
+    default: 1,
+  },
+});
+
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -23,42 +35,43 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: [true, "Please provide email"],
     match: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please provide valid email",
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/,
+      "Please provide a valid email",
     ],
   },
 
   password: {
     type: String,
-    required: [true, "Please provide password"],
+    required: [true, "Please provide a password"],
     minlength: 6,
   },
 
   address: {
     type: String,
-    // required: [true, "Please provide address"],
     trim: true,
     minlength: 3,
   },
 
   city: {
     type: String,
-    // required: [true, "Please provide city"],
     trim: true,
     minlength: 3,
   },
 
   state: {
     type: String,
-    // required: [true, "Please provide first name"],
     trim: true,
     minlength: 3,
   },
+
+  cartData: [cartItemSchema],
 });
 
 UserSchema.pre("save", async function () {
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
 });
 
 UserSchema.methods.createToken = function () {

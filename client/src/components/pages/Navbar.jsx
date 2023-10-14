@@ -54,21 +54,13 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // The code inside this useEffect will execute when 'category' changes.
-    // console.log(category); // Log the updated value of category
-    // if (category === '') {
-    //   navigateTo('/')
-    // }
     if (category === "all") {
-      // console.log('hellow')
       navigateTo("/products");
     }
     if (category === "fruit") {
-      // console.log('hi')
       navigateTo("/categoryProduct");
     }
     if (category === "vegetable") {
-      // console.log('hello')
       navigateTo("/categoryProduct");
     }
   }, [category]);

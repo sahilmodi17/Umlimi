@@ -1,3 +1,4 @@
+// controllers/orderController.js
 const Order = require("../models/Order");
 
 const placeOrder = async (req, res) => {
@@ -23,12 +24,20 @@ const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find()
       .sort({ orderDate: -1 })
-      .populate("userId")
-      .populate("products.productId");
+      .populate({
+        path: "userId",
+        select: "firstName  lastName email ",
+      })
+      .populate({
+        path: "products.productId",
+        select: "name price",
+      });
 
     if (orders.length === 0) {
       return res.status(404).json({ message: "No orders found" });
     }
+
+    console.log(orders);
 
     res.status(200).json({ orders });
   } catch (error) {
