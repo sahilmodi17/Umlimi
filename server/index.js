@@ -12,6 +12,7 @@ const authentication = require("./middleware/authentication");
 const dashboardRouter = require("./routes/dashboardRouter");
 const productrouter = require("./routes/product");
 const orderRouter = require("./routes/order");
+const cartRouter = require("./routes/cart");
 
 const fileUpload = require("express-fileupload");
 
@@ -34,6 +35,7 @@ app.use("/api/v1/auth", auth);
 app.use("/api/v1/admin", productrouter);
 app.use("/api/v1/dashboard", authentication, dashboardRouter);
 app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/cart", cartRouter);
 
 const start = async () => {
   console.log("this time");

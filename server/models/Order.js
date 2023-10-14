@@ -1,3 +1,4 @@
+// models/Order.js
 const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema({
@@ -25,8 +26,6 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-
-  // Add other fields if needed
 });
 
 module.exports = mongoose.model("Order", OrderSchema);
