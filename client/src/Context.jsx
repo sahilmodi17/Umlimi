@@ -18,6 +18,8 @@ export const UserProvider = ({ children }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [userId, setUserId] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
+
   const searchproduct = async () => {
     console.log(searchName);
 
@@ -89,6 +91,8 @@ export const UserProvider = ({ children }) => {
         setUserId,
         allUsers,
         setAllUsers,
+        allOrders,
+        setAllOrders,
       }}
     >
       {children}

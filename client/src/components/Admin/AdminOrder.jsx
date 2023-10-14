@@ -2,29 +2,56 @@ import React, { useEffect } from "react";
 
 import { useUserContext } from "../../Context";
 import { AdminNavbar } from "./Sidebar";
+import { FiUpload } from "react-icons/fi";
+import OrderTable from "./OrderTable";
 
 const AdminOrder = () => {
-  const { setSidebar } = useUserContext();
+  const { setSidebar, allOrders } = useUserContext();
 
   useEffect(() => {
     setSidebar("Orders");
   }, []);
 
+  // Calculate total number of products
+  const totalProducts = allOrders.reduce(
+    (acc, order) => acc + order.products.length,
+    0
+  );
+
   return (
     <>
-      <div className=" flex min-h-[140vh] w-[80%] bg-emerald-100">
-        <div className="container ">
+      <div className=" flex min-h-[100vh] w-[80%]">
+        <div className="container  bg-emerald-100">
           <AdminNavbar />
 
           <div className="flex flex-wrap ml-5 ">
-            <div className="w-[65%] h-[52vh] bg-white rounded-2xl shadow ml-2">
-              <div className="text-5xl flex justify-center items-center h-full">
-                Order Page Coming Soon...
+            <div className="w-[95%] min-h-[87vh] bg-white rounded-2xl shadow ml-2 p-5 pt-3">
+              <div className="h-16 items-center flex justify-between">
+                <div className="text-neutral-600 text-2xl font-bold  ">
+                  Total Products: {totalProducts}
+                </div>
+                <div className="">
+                  <input
+                    className="w-96 h-10 bg-white border border-zinc-500 rounded-lg pl-2 "
+                    placeholder="Search for items..."
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="w-[40%] flex justify-around items-center  mr-3">
+                  <div className="text-emerald-400 flex items-center">
+                    <FiUpload className="mr-1" />
+                    <div className=" text-base font-medium">Export</div>
+                  </div>
+
+                  <div>This Year</div>
+                </div>
+              </div>
+              <div className="pt-2">
+                <OrderTable />
               </div>
             </div>
-            <div className="w-[31%] h-[52vh] bg-white rounded-2xl shadow mx-3 mr-4"></div>
-            <div className="w-[97%] h-[80vh] bg-white rounded-2xl shadow ml-2 mt-3"></div>
-            {/* Write Your Code here  */}
           </div>
         </div>
       </div>
