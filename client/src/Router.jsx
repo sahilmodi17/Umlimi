@@ -19,11 +19,11 @@ import CategoryProduct from './components/pages/shoppingCart/CategoryProduct'
 import Splash from './components/auth/Splash'
 import Product from './components/pages/product/Product'
 import EditProduct from './components/Admin/EditProduct'
+import MyOrders from './components/pages/shoppingCart/MyOrders'
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
-
 
     children: [
       {
@@ -53,7 +53,11 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <Product />,
-      }
+      },
+      {
+        path: '/myorder/:userId',
+        element: <MyOrders />,
+      },
     ],
   },
   {
@@ -102,7 +106,7 @@ const router = createBrowserRouter([
   {
     path: '/splash',
     element: <Splash />,
-  }
+  },
 ])
 
 export default router
