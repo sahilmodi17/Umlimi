@@ -15,8 +15,8 @@ const PopUp_Dialog = ({ onClose }) => {
     try {
       const data = { otp: verificationCode, email }; // Change verificationCode to otp
       const res = await axios.post("/api/v1/auth/user/verify", data);
-      console.log(res.data.msg); // Use res.data.msg to access the response message
-      console.log("Verification Code:", verificationCode);
+      // console.log(res.data.msg); // Use res.data.msg to access the response message
+      // console.log("Verification Code:", verificationCode);
 
       if (res.data.msg === "Verification successful") {
         setOTP(verificationCode);

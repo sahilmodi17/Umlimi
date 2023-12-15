@@ -34,7 +34,7 @@ const ProductTable = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`/api/v1/admin/deleteProduct/${id}`);
-      console.log(response.data);
+      // console.log(response.data);
       // navigateTo("/admin/products");
     } catch (error) {
       console.log(error);

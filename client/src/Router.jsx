@@ -20,6 +20,8 @@ import Splash from './components/auth/Splash'
 import Product from './components/pages/product/Product'
 import EditProduct from './components/Admin/EditProduct'
 import MyOrders from './components/pages/shoppingCart/MyOrders'
+import Success from './components/Success'
+import Cancel from './components/Cancel'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: '/myorder/:userId',
         element: <MyOrders />,
+      },
+      {
+        path: '/success',
+        element: <Success />,
+      },
+      {
+        path: '/cancel',
+        element: <Cancel />,
       },
     ],
   },

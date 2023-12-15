@@ -27,7 +27,7 @@ const Login = () => {
         const res = await axios.post("/api/v1/auth/user/login", data);
 
         setUserId(res.data.user._id);
-        console.log(res.data.user);
+        // console.log(res.data.user);
 
         if (
           res.data.user.firstName === "admin" &&

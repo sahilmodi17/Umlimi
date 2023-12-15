@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const MyOrders = () => {
-  // const userId = '65291fe8d3d8386320468ed4'
   const { userId } = useParams()
   const [myOrders, setMyOrders] = useState([])
   const [products, setProducts] = useState({}) // Use an object to store products by ID
@@ -11,7 +10,7 @@ const MyOrders = () => {
 
   const navigateTo = useNavigate()
   const getMyOrders = async () => {
-    if(userId){
+    if (userId) {
       try {
         // console.log(userId)
         const response = await axios.get(`/api/v1/order/getUserOrder/${userId}`)
@@ -20,6 +19,9 @@ const MyOrders = () => {
 
         if (data && data.orders) {
           // console.log('Orders:', data.orders)
+      
+
+          // console.log(sortedOrders)
           setMyOrders(data.orders)
         } else {
           setMyOrders()
@@ -31,8 +33,7 @@ const MyOrders = () => {
     } else {
       alert('you are not login ')
       navigateTo('/login')
-    } 
-    
+    }
   }
 
   const fetchAllProducts = async () => {
@@ -98,25 +99,25 @@ const MyOrders = () => {
               <tbody>
                 {myOrders?.map((item, orderIndex) => {
                   {
-                    count += 2
+                    count ++
                   }
                   return (
                     <React.Fragment key={item._id}>
                       {item.products.map((product1, index) => {
                         const product = products[product1.productId]
                         if (!product) return null
-                        const total = product.price * product.qty
+                        const total = product.price * product1.qty
                         return (
                           <tr
                             className='border-b border-gray-200 font-semibold text-lg'
                             key={product._id}
                           >
                             <td scope='row' className='px-6 py-2'>
-                              {count + index - 1}
+                              {count + index }
                             </td>
                             <td className='px-6 py-2'>{product.name}</td>
                             <td className='px-6 py-2'>{product.category}</td>
-                            <td className='px-6 py-2'>{product.qty}</td>
+                            <td className='px-6 py-2'>{product1.qty}</td>
                             <td className='px-6 py-2'>{product.price}</td>
                             <td className='px-6 py-2'>{product1._id}</td>
                             <td className='px-6 py-2'>{total}$</td>

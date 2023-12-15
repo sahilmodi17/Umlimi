@@ -27,7 +27,7 @@ const EditProduct = () => {
       const { data } = await axios.get('/api/v1/admin/getAllProducts')
       setAllProducts(data.products)
       const productToEdit = data.products.find((item) => item._id === id)
-      console.log(productToEdit)
+      // console.log(productToEdit)
       setEditProduct(productToEdit)
     } catch (error) {
       console.log(error)
@@ -93,7 +93,7 @@ const EditProduct = () => {
       formDataToSubmit.append('image1', currentImageFile)
     }
 
-    console.log('inside handle edit', formDataToSubmit)
+    // console.log('inside handle edit', formDataToSubmit)
     try {
       const data = await axios.patch(
         `/api/v1/admin//updateProduct/${id}`,

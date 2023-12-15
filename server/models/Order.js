@@ -1,23 +1,27 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "Please provide the user ID"],
+    ref: 'User',
+    required: [true, 'Please provide the user ID'],
   },
 
   products: [
     {
       productId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: [true, "Please provide the product ID"],
+        ref: 'Product',
+        required: [true, 'Please provide the product ID'],
       },
       qty: {
         type: Number,
-        required: [true, "Please Enter the qty"],
+        required: [true, 'Please Enter the qty'],
       },
+      transactionId: {
+        type: String,
+        required: [true, 'Please provide the transaction ID'],
+      }
     },
   ],
 
@@ -27,6 +31,6 @@ const OrderSchema = new mongoose.Schema({
   },
 
   // Add other fields if needed
-});
+})
 
-module.exports = mongoose.model("Order", OrderSchema);
+module.exports = mongoose.model('Order', OrderSchema)

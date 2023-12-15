@@ -21,12 +21,12 @@ const adminRegister = async (req, res) => {
         const dup_email = await Admin.findOne({ email: email });
         if (dup_email) {
           // console.log("here")
-          console.log(dup_email.email);
+          // console.log(dup_email.email);
           return res.status(409).json({ msg: "Duplicate email" });
         }
         const admin = await Admin.create(tempData);
         const token = admin.createToken();
-        console.log("1");
+        // console.log("1");
         res.cookie("token", token, {
           httpOnly: false,
           expires: new Date(Date.now() + 600000),
@@ -59,18 +59,18 @@ const adminLogin = async (req, res) => {
     }
 
     const dbPassword = admin.password;
-    console.log(dbPassword);
-    console.log(password);
+    // console.log(dbPassword);
+    // console.log(password);
 
     bcrypt.compare(password, dbPassword, (err, data) => {
       if (err) {
         return res.status(404).json({ status: "something went wrong" });
       }
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         const token = admin.createToken();
-        console.log("login token : " + token);
+        // console.log("login token : " + token);
         res.cookie("token", token, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // ms
           httpOnly: false,
@@ -99,18 +99,18 @@ const userLogin = async (req, res) => {
     }
 
     const dbPassword = user.password;
-    console.log(dbPassword);
-    console.log(password);
+    // console.log(dbPassword);
+    // console.log(password);
 
     bcrypt.compare(password, dbPassword, (err, data) => {
       if (err) {
         return res.status(404).json({ status: "something went wrong" });
       }
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         const token = user.createToken();
-        console.log("login token : " + token);
+        // console.log("login token : " + token);
         res.cookie("token", token, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // ms
           httpOnly: false,
@@ -131,14 +131,14 @@ const otpStorage = {};
 
 const sendOtp = async (req, res) => {
   const email = req.body.email;
-  console.log("inside send otp");
-  console.log(email);
+  // console.log("inside send otp");
+  // console.log(email);
   // Generate a random OTP
   const otp = randomstring.generate({
     length: 6,
     charset: "numeric",
   });
-  console.log(otp);
+  // console.log(otp);
   // Store the OTP in memory
   otpStorage[email] = otp;
 
@@ -165,21 +165,21 @@ const sendOtp = async (req, res) => {
 };
 
 const verifyOTP = async (req, res) => {
-  console.log("inside verification");
+  // console.log("inside verification");
   const { otp, email } = req.body; // Assuming email is sent along with OTP in the request body
-  console.log("Received OTP:", otp);
-  console.log("Received Email:", email);
+  // console.log("Received OTP:", otp);
+  // console.log("Received Email:", email);
 
   // Check the contents of otpStorage
-  console.log("otpStorage:", otpStorage);
+  // console.log("otpStorage:", otpStorage);
 
   try {
     if (otpStorage[email] === otp) {
       delete otpStorage[email];
-      console.log("successful");
+      // console.log("successful");
       res.status(200).json({ msg: "Verification successful" });
     } else {
-      console.log("invalid");
+      // console.log("invalid");
       res.status(200).json({ msg: "Invalid OTP" });
     }
   } catch (error) {
@@ -195,7 +195,7 @@ const userRegister = async (req, res) => {
     // Check if email is already registered
     const dup_email = await User.findOne({ email });
     if (dup_email) {
-      console.log("Duplicate email:", email);
+      // console.log("Duplicate email:", email);
       return res.status(409).json({ msg: "Duplicate email" });
     }
 
@@ -227,7 +227,7 @@ const getUser = async (req, res) => {
   // console.log("hi", req.user);
 
   const { userId } = req.user;
-
+  // console.log(userId)
   try {
     const user = await User.findOne({ _id: userId });
     return res.status(200).json({ user });
@@ -258,7 +258,7 @@ const editUser = async (req, res) => {
 };
 
 const getAllUser = async (req, res) => {
-  console.log("hi");
+  // console.log("hi");
   try {
     const users = await User.find({});
     res.send({ users });

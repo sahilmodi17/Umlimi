@@ -9,8 +9,14 @@ const SingleProduct = () => {
   const { qty } = useCartContext()
   const { id } = useParams()
   const { addToCart } = useCartContext()
-  const { searchproduct, isSearch, searchName, searchData, setIsSearch } =
-    useUserContext()
+  const {
+    searchproduct,
+    isSearch,
+    searchName,
+    searchData,
+    setIsSearch,
+    categoryData,
+  } = useUserContext()
 
   let product = featuredProducts.filter((item) => {
     return item.id === id
@@ -18,6 +24,12 @@ const SingleProduct = () => {
 
   if (product.length === 0) {
     product = searchData.filter((item) => {
+      return item._id === id
+    })
+  }
+
+  if (product.length === 0) {
+    product = categoryData.filter((item) => {
       return item._id === id
     })
   }

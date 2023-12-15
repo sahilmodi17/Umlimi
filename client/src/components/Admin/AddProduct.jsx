@@ -44,13 +44,13 @@ const AddProduct = () => {
     formDataToSubmit.append('image1', formData.image1)
     // formDataToSubmit.append('image2', formData.image2);
     // formDataToSubmit.append('image3', formData.image3);
-    console.log(formDataToSubmit)
+    // console.log(formDataToSubmit)
     try {
       const data = await axios.post(
         '/api/v1/admin/addProduct',
         formDataToSubmit
       )
-      console.log(data)
+      // console.log(data)
 
       if (data) {
         alert('product has been added')

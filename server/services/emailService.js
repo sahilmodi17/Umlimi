@@ -11,9 +11,9 @@ module.exports = async ({ from, to, subject, text, html }) => {
     },
   });
 
-  console.log("mail will be send to ", to);
+  // console.log("mail will be send to ", to);
 
-  console.log("half done");
+  // console.log("half done");
 
   const info = await transporter.sendMail({
     from: `UMLIMI <${from}>`, // sender address
@@ -23,6 +23,6 @@ module.exports = async ({ from, to, subject, text, html }) => {
     html: html, // html body
   });
 
-  console.log("full done");
-  console.log(info);
+  // console.log("full done");
+  // console.log(info);
 };

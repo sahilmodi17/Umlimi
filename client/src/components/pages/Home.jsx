@@ -28,7 +28,7 @@ const Home = () => {
 
   const handleAddToCart = (product) => {
 
-    console.log(product);
+    // console.log(product);
     addToCart(product);
   };
 

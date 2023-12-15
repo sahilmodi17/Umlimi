@@ -7,7 +7,7 @@ const SearchProduct = () => {
   const { searchproduct, searchData, searchName } = useUserContext();
 
   const handleAddToCart = (product) => {
-    console.log(product);
+    // console.log(product);
     addToCart(product);
   };
 

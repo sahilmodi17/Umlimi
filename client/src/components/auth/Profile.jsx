@@ -66,7 +66,7 @@ const Profile = () => {
   const handleMyOrders = async () => {
     try {
       const response = await axios.get(`/api/v1/order/getUserOrder/${userId}`)
-      console.log(response)
+      // console.log(response)
     } catch (error) {
       console.log(error)
     }

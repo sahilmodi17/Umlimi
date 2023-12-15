@@ -83,7 +83,7 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-  console.log("inside the deleteProduct method");
+  // console.log("inside the deleteProduct method");
   const productId = req.params.productId;
   try {
     const deleteProduct = await Product.findOneAndDelete({ _id: productId });
@@ -113,9 +113,9 @@ const getProducts = async (req, res) => {
 const getProductCategorywise = async (req, res) => {
   try {
     // console.log('inside getProductCategorywise')
-    console.log(req.query.category);
+    // console.log(req.query.category);
     const products = await Product.find({ category: req.query.category });
-    console.log(products);
+    // console.log(products);
 
     if (!products) {
       throw "invalid category";
@@ -130,10 +130,10 @@ const getProductCategorywise = async (req, res) => {
 
 const searchProduct = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     const products = await Product.find({
-      name: { $regex: "." + req.body.name + ".", $options: "i" },
+      name: { $regex:  req.body.name , $options: "i" },
     });
     if (products.length > 0) {
       res.status(200).send({ products });

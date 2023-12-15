@@ -12,15 +12,15 @@ const CategoryProduct = () => {
       navigateTo("/products");
     } else {
       try {
-        console.log("inside handlecategorydata");
-        console.log(category);
+        // console.log("inside handlecategorydata");
+        // console.log(category);
         const queryParams = { category };
         const { data } = await axios.get(`/api/v1/admin/getProductCategory`, {
           params: queryParams,
         });
-        console.log(data);
+        // console.log(data);
         setCategoryData(data.products);
-        console.log(data.products);
+        // console.log(data.products);
       } catch (error) {
         console.log(error);
       }

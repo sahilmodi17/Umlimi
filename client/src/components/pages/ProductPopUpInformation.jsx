@@ -4,7 +4,7 @@ import { useUserContext } from "../../Context";
 
 const ProductPopUpInformation = ({ onClose, product }) => {
   const [isOpen, setIsOpen] = useState(true);
-  console.log(product);
+  // console.log(product);
   const handleCancel = () => {
     setIsOpen(false);
     onClose(); // Call the onClose function passed from the parent component
