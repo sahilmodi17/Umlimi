@@ -1,0 +1,4 @@
+.hide-bg {
+    mix-blend-mode: multiply;
+    filter: contrast(2);
+}
