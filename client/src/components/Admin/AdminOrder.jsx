@@ -8,7 +8,7 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 
 const AdminOrder = () => {
-  const { setSidebar, allOrders, setSearchTerm } = useUserContext();
+  const { setSidebar, allOrders, setSearchTerm, searchTerm } = useUserContext();
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const AdminOrder = () => {
         <div className="container bg-emerald-100">
           <AdminNavbar />
 
-          <div className="flex flex-wrap ml-5">
+          <div className="mt-10 flex flex-wrap ml-5">
             <div className="w-[95%] min-h-[87vh] bg-white rounded-2xl shadow ml-2 p-5 pt-3">
               <div className="h-16 items-center flex justify-between">
                 <div className="text-neutral-600 text-2xl font-bold  ">

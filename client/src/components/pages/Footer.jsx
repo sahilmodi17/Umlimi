@@ -1,9 +1,10 @@
 import React from "react";
 import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-
+import { useUserContext } from "../../Context";
 const Footer = () => {
   const navigateTo = useNavigate();
+  const { userId } = useUserContext();
   return (
     <>
       <footer className="bg-white dark:bg-gray-900 font-quicksand  ">
@@ -30,37 +31,20 @@ const Footer = () => {
                 </div>
               </div>
               {/* <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3"> */}
-              <div>
+              {/* <div>
                 <h2 className=" mb-6  text-lg font-quicksand text-gray-900  dark:text-white">
                   Account
                 </h2>
                 <ul className=" h-32 mb-6 text-gray-500 dark:text-gray-400 font-medium flex flex-col justify-between">
+                  
+
                   <li className="">
-                    <a href="#" className="hover:underline">
-                      Wishlist
-                    </a>
-                  </li>
-                  <li className="">
-                    <a
-                      href="/cart"
-                      className="  hover:underline"
-                      // onClick={() => navigateTo("/cart")}
-                    >
-                      Cart
-                    </a>
-                  </li>
-                  <li className="">
-                    <a href="#" className="hover:underline">
-                      Track Order
-                    </a>
-                  </li>
-                  <li className="">
-                    <a href="#" className="hover:underline">
-                      Shipping Details
+                    <a href="/myorder" className="hover:underline">
+                      My order
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div>
                 <h2 className="mb-6 text-lg font-quicksand text-gray-900  dark:text-white">
                   Usefull Links
@@ -76,19 +60,14 @@ const Footer = () => {
                       Contact
                     </a>
                   </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Hot Deals
+                  <li className="">
+                    <a href="/cart" className="  hover:underline">
+                      Cart
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:underline">
                       New Product
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Promotions
                     </a>
                   </li>
                 </ul>

@@ -36,6 +36,7 @@ const Cart = () => {
             <OrderSummaryItem total={total} />
           </Grid>
         </Grid>
+        <div className="text-2xl">1 quantity equal to 250g</div>
       </Container>
     </React.Fragment>
   );

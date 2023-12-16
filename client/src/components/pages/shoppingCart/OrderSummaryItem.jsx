@@ -200,7 +200,7 @@ export default function OrderSummaryItem({ total }) {
               component="div"
               className={classes.BlackText}
             >
-              $0
+              ${total}
             </Typography>
           </Grid>
         </Grid>

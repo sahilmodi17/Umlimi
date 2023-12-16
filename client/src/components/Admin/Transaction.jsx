@@ -1,5 +1,3 @@
-// Transaction.jsx
-
 import React, { useEffect, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { AdminNavbar } from "./Sidebar";

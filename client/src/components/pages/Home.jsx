@@ -54,7 +54,7 @@ const Home = () => {
 
             <div className="flex items-center justify-between">
               <span className="text-xl font-semibold text-emerald-500 ">
-                ${product.price}
+                ${product.price}/250g
               </span>
 
               <button
