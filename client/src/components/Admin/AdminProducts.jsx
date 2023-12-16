@@ -52,7 +52,7 @@ const AdminProducts = () => {
         <div className="container bg-emerald-100">
           <AdminNavbar />
 
-          <div className="flex flex-wrap ml-5">
+          <div className="mt-10 flex flex-wrap ml-5">
             <div className="w-[95%] min-h-[87vh] bg-white rounded-2xl shadow ml-2 p-5 pt-3">
               <div className="h-16 items-center flex justify-between">
                 <div className="text-neutral-600 text-2xl font-bold  ">

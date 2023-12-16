@@ -103,7 +103,7 @@ export const AdminNavbar = () => {
 
   return (
     <>
-      <div className=" h-[10%] flex justify-between items-center ml-5">
+      <div className=" h-[4%] flex justify-between items-center ml-5">
         <div className=" text-neutral-600 text-4xl font-bold h-[50%] ml-2">
           {sidebar}
         </div>
